@@ -53,3 +53,10 @@ jobs:
           grep -Fq 'initial:' /tmp/epu-demo.txt
           grep -Fq 'target :' /tmp/epu-demo.txt
           grep -Fq 'step=' /tmp/epu-demo.txt
+
+      - name: Verify retained Python golden vectors
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/generate_python_golden.py --output /tmp/python_golden_vectors.json
+          diff -u examples/python_golden_vectors.json /tmp/python_golden_vectors.json
