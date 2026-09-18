@@ -1,0 +1,59 @@
+name: EPU reference smoke
+
+on:
+  pull_request:
+    paths:
+      - 'code/**'
+      - 'tests/**'
+      - 'examples/**'
+      - 'scripts/run_demo.sh'
+      - '.github/workflows/reference-smoke.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'code/**'
+      - 'tests/**'
+      - 'examples/**'
+      - 'scripts/run_demo.sh'
+      - '.github/workflows/reference-smoke.yml'
+
+permissions:
+  contents: read
+
+env:
+  SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+
+jobs:
+  reference-smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ env.SOURCE_SHA }}
+          persist-credentials: false
+
+      - name: Verify exact source binding
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.12'
+
+      - name: Compile reference implementation and tests
+        run: python -m py_compile code/epu_reference.py tests/test_epu_reference.py
+
+      - name: Run deterministic reference tests
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
+
+      - name: Run bounded demo smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          python code/epu_reference.py > /tmp/epu-demo.txt
+          test -s /tmp/epu-demo.txt
