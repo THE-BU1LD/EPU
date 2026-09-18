@@ -1,0 +1,55 @@
+name: Reference smoke
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: epu-reference-smoke-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ env.SOURCE_SHA }}
+          persist-credentials: false
+
+      - name: Verify exact source
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          test -z "$(git status --porcelain)"
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.11"
+
+      - name: Compile reference implementation
+        run: python -m py_compile code/epu_reference.py
+
+      - name: Validate demo script syntax
+        run: bash -n scripts/run_demo.sh
+
+      - name: Execute deterministic reference demo
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/run_demo.sh | tee /tmp/epu-demo.txt
+          test -s /tmp/epu-demo.txt
+          grep -Fq 'initial:' /tmp/epu-demo.txt
+          grep -Fq 'target :' /tmp/epu-demo.txt
+          grep -Fq 'step=' /tmp/epu-demo.txt
