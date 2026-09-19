@@ -1,0 +1,129 @@
+{
+  "config": {
+    "alpha_den": 5,
+    "alpha_num": 3,
+    "beta_den": 1,
+    "beta_num": 6,
+    "dim": 4,
+    "memory_count": 4,
+    "threshold": 0.25,
+    "threshold_q": 64
+  },
+  "converged": true,
+  "final_q": [291, -223, 299, 272],
+  "float_tolerance": 0.00390625,
+  "format": {
+    "clip_max": 127.0,
+    "clip_min": -128.0,
+    "frac_bits": 8,
+    "rounding": "nearest_ties_away_from_zero",
+    "scale": 256,
+    "word_bits": 16
+  },
+  "initial_float": [
+    0.4714982944994871,
+    -3.0474524782264942,
+    2.452803419119561,
+    -0.2826911399973717
+  ],
+  "initial_q": [121, -780, 628, -72],
+  "memories_q": [
+    [512, 256, 0, 256],
+    [-256, 512, 256, 0],
+    [256, -512, 512, 256],
+    [0, 256, -256, 512]
+  ],
+  "schema_version": "epu.hdl-fixed-golden.v1",
+  "seed": 7,
+  "step_count": 8,
+  "steps": [
+    {
+      "converged": false,
+      "delta_q": 462,
+      "max_abs_error_vs_float": 0.0015649189981200573,
+      "next_q": [173, -584, 537, 51],
+      "recon_q": [250, -289, 400, 235],
+      "scores_q": [-3660, -6318, 17190, -9312],
+      "shifted_q": [5908, 3250, 26758, 256],
+      "state_q": [121, -780, 628, -72],
+      "step": 0
+    },
+    {
+      "converged": false,
+      "delta_q": 284,
+      "max_abs_error_vs_float": 0.002450962771821885,
+      "next_q": [213, -473, 481, 128],
+      "recon_q": [273, -306, 396, 244],
+      "scores_q": [-1122, -4824, 14796, -6114],
+      "shifted_q": [5248, 1546, 21166, 256],
+      "state_q": [173, -584, 537, 51],
+      "step": 1
+    },
+    {
+      "converged": false,
+      "delta_q": 180,
+      "max_abs_error_vs_float": 0.0008623921772349386,
+      "next_q": [247, -414, 445, 179],
+      "recon_q": [299, -326, 392, 255],
+      "scores_q": [486, -4068, 13494, -4188],
+      "shifted_q": [4930, 376, 17938, 256],
+      "state_q": [213, -473, 481, 128],
+      "step": 2
+    },
+    {
+      "converged": false,
+      "delta_q": 142,
+      "max_abs_error_vs_float": 0.001202795043135918,
+      "next_q": [268, -363, 409, 213],
+      "recon_q": [300, -287, 356, 264],
+      "scores_q": [1554, -3780, 12864, -3006],
+      "shifted_q": [5590, 256, 16900, 1030],
+      "state_q": [247, -414, 445, 179],
+      "step": 3
+    },
+    {
+      "converged": false,
+      "delta_q": 113,
+      "max_abs_error_vs_float": 0.002394327168174115,
+      "next_q": [280, -319, 375, 236],
+      "recon_q": [297, -252, 325, 271],
+      "scores_q": [2316, -3510, 12150, -2076],
+      "shifted_q": [6082, 256, 15916, 1690],
+      "state_q": [268, -363, 409, 213],
+      "step": 4
+    },
+    {
+      "converged": false,
+      "delta_q": 90,
+      "max_abs_error_vs_float": 0.003664385912182544,
+      "next_q": [286, -281, 345, 252],
+      "recon_q": [296, -224, 301, 277],
+      "scores_q": [2862, -3258, 11424, -1332],
+      "shifted_q": [6376, 256, 14938, 2182],
+      "state_q": [280, -319, 375, 236],
+      "step": 5
+    },
+    {
+      "converged": false,
+      "delta_q": 72,
+      "max_abs_error_vs_float": 0.0022817604589231433,
+      "next_q": [289, -249, 320, 264],
+      "recon_q": [294, -202, 282, 281],
+      "scores_q": [3258, -3018, 10740, -732],
+      "shifted_q": [6532, 256, 14014, 2542],
+      "state_q": [286, -281, 345, 252],
+      "step": 6
+    },
+    {
+      "converged": true,
+      "delta_q": 57,
+      "max_abs_error_vs_float": 0.002007136755499239,
+      "next_q": [291, -223, 299, 272],
+      "recon_q": [293, -184, 267, 285],
+      "scores_q": [3558, -2802, 10146, -246],
+      "shifted_q": [6616, 256, 13204, 2812],
+      "state_q": [289, -249, 320, 264],
+      "step": 7
+    }
+  ]
+}
