@@ -56,3 +56,16 @@ jobs:
 
       - name: Verify retained Python golden vectors
         run: python scripts/generate_python_golden.py --verify examples/python_golden_vectors.json --atol 1e-12
+
+      - name: Install Icarus Verilog
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends iverilog
+
+      - name: Verify retained fixed-point golden vectors
+        run: python scripts/generate_hdl_golden.py --verify examples/hdl_fixed_golden_vectors.json
+
+      - name: Simulate HDL parity
+        run: python scripts/verify_hdl_parity.py
