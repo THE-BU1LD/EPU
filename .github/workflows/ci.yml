@@ -38,8 +38,11 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Compile reference implementation
-        run: python -m py_compile code/epu_reference.py
+      - name: Compile reference implementation and tests
+        run: python -m py_compile code/epu_reference.py tests/test_epu_reference.py
+
+      - name: Run deterministic reference unit tests
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
 
       - name: Validate demo script syntax
         run: bash -n scripts/run_demo.sh
