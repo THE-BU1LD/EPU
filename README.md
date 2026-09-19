@@ -12,12 +12,18 @@ EPU-Ω∞ is an exploratory Hopfield-inspired associative-memory compute scaffol
 - `benchmarks/Benchmark_Protocol.md` — proposed evaluation dimensions;
 - `examples/test_vectors.json` and supporting figures/appendix material.
 
-The repository CI executes the Python reference, regenerates retained floating/fixed-point golden vectors, compiles the Verilog with Icarus Verilog, and compares the retained eight-step HDL trajectory exactly against the fixed-point reference. The fixed-point trajectory is additionally required to stay within one Q7.8 LSB of the floating Python update on the retained vector. This is an arithmetic parity gate only; it does **not** certify FPGA synthesis, timing, resource use, benchmark performance, capacity, or paper-level hardware claims.
+The repository CI executes deterministic Python unit tests, the Python reference, regenerates retained floating/fixed-point golden vectors, compiles the Verilog with Icarus Verilog, and compares the retained eight-step HDL trajectory exactly against the fixed-point reference. The fixed-point trajectory is additionally required to stay within one Q7.8 LSB of the floating Python update on the retained vector. This is an arithmetic/software parity gate only; it does **not** certify FPGA synthesis, timing, resource use, benchmark performance, capacity, or paper-level hardware claims.
 
 ## Quick start
 
 ```bash
 bash scripts/run_demo.sh
+```
+
+Run the deterministic software-invariant tests with:
+
+```bash
+python -m unittest discover -s tests -p 'test_*.py' -v
 ```
 
 ## Hardware-parity boundary
@@ -57,4 +63,4 @@ This description is a design target. It is not evidence of speed, capacity, nois
 
 ## Evidence boundary
 
-No benchmark result or hardware-performance claim is supported merely by the presence of the paper, Verilog file, Logisim blueprint, or proposed benchmark protocol. Any future claim should be tied to executable tests, retained outputs, explicit fixed-point semantics, and reproducible hardware/software comparison evidence.
+The deterministic unit tests check bounded software invariants such as normalized weights, dimensionality, finite values, and repeatability. No benchmark result or hardware-performance claim is supported merely by those tests or by the presence of the paper, Verilog file, Logisim blueprint, or proposed benchmark protocol. Any future claim should be tied to executable tests, retained outputs, explicit fixed-point semantics, and reproducible hardware/software comparison evidence.
