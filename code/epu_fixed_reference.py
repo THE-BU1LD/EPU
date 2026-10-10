@@ -31,6 +31,9 @@ def round_div_signed(numerator: int, denominator: int) -> int:
         raise ValueError("numerator must be an integer")
     if isinstance(denominator, bool) or not isinstance(denominator, Integral) or denominator <= 0:
         raise ValueError("denominator must be a positive integer")
+    # Integral implementations such as NumPy scalars may wrap during addition
+    # or negation. The reference contract uses unbounded integer arithmetic.
+    numerator, denominator = int(numerator), int(denominator)
     if numerator >= 0:
         return (numerator + denominator // 2) // denominator
     return -((-numerator + denominator // 2) // denominator)
