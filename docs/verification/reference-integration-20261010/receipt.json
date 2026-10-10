@@ -1,0 +1,95 @@
+{
+  "schema": "epu.engineering-integration.v1",
+  "date_utc": "2026-10-10",
+  "evidence_scope": "Authored arithmetic regressions and retained golden consistency; no hardware-performance or confirmatory outcome run",
+  "parent_commits": [
+    "627e64c09339c09d9db4359056e345da929ffa46",
+    "92b0db58b179fef4dc74a2a368152fe4d3a0d7db"
+  ],
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "baseline": {
+    "source_commit": "627e64c09339c09d9db4359056e345da929ffa46",
+    "source_sha256": "c496fb4ae8edcd8146bfa078ebc2cece36a1e938df1c930ace50c09f94be2316",
+    "new_test_methods": 4,
+    "failures": 4,
+    "log": "docs/verification/reference-integration-20261010/baseline.log"
+  },
+  "checks": [
+    {
+      "argv": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "docs/verification/reference-integration-20261010/check-1.log"
+    },
+    {
+      "argv": [
+        "python",
+        "scripts/generate_python_golden.py",
+        "--verify",
+        "examples/python_golden_vectors.json",
+        "--atol",
+        "1e-12"
+      ],
+      "exit_code": 0,
+      "log": "docs/verification/reference-integration-20261010/check-2.log"
+    },
+    {
+      "argv": [
+        "python",
+        "scripts/generate_hdl_golden.py",
+        "--verify",
+        "examples/hdl_fixed_golden_vectors.json"
+      ],
+      "exit_code": 0,
+      "log": "docs/verification/reference-integration-20261010/check-3.log"
+    },
+    {
+      "argv": [
+        "python",
+        "-m",
+        "ruff",
+        "check",
+        "--select",
+        "F",
+        "code/epu_reference.py",
+        "code/epu_fixed_reference.py",
+        "scripts/verify_hdl_parity.py",
+        "tests"
+      ],
+      "exit_code": 0,
+      "log": "docs/verification/reference-integration-20261010/check-4.log"
+    }
+  ],
+  "local_simulator": {
+    "iverilog": null,
+    "vvp": null,
+    "status": "UNAVAILABLE; rely on hosted parity gate"
+  },
+  "sha256": {
+    "code/epu_reference.py": "6ad101356a0e91b4220b0bfa2bd2335246d91743ee9b678d69fdc68f3f2c5265",
+    "code/epu_fixed_reference.py": "6e8d860cf759b7ffe245f45e3a2bef383c103e5dfa34c556e20ed7257e59c48d",
+    "code/epu_core.v": "134e892fc489d3c60b314b56ec511df948974bf20560fce519654b91d99aceec",
+    "scripts/verify_hdl_parity.py": "253ee305178d615741f967acbd7e5826af68f79358823bf16965581f66c94005",
+    "scripts/generate_python_golden.py": "7b10177f3a01efb1ed802caa5899a8cbba6a0a13a147f47cc6a7afb083d62c50",
+    "scripts/generate_hdl_golden.py": "e4b32c08e7521bf256ccb1ea3d455c71db621647d04557a03930fc30d7111d5b",
+    "tests/test_epu_reference.py": "dc7d98eff89b104f7e491a52fd1d50b39272b3f13d53e47f1646d32842f4274a",
+    "tests/test_hdl_transcript.py": "cd133b49624346d60294ff5babfe5a761e6566117ce9bff838f1403f98cb5df2",
+    "tests/test_integral_rounding.py": "b2ff9920e86bf95a03800b6ebb9591a30e09f9bf3e8d6848e1f1e879109cf428",
+    "tests/test_integral_vectors.py": "ca2fe78ad3e95019c6224e1c62261f53d22d0710b401df89452be5003405c8a4",
+    "tests/test_numeric_contract.py": "394e93c3ec9f3d617f14fcde4e41817890271caf990bf76caf699e36ddf17498",
+    "examples/python_golden_vectors.json": "f556b76e0e76c1e2450300c8e4d5f38a56c0c1313de71a7a3e325165a3a12bb5",
+    "examples/hdl_fixed_golden_vectors.json": "8b7e0272826fbc31910a4c82de82579782919a59d2847885573d4458dfe83c87",
+    "docs/HDL_FIXED_POINT_CONTRACT.md": "b9c7424ce23849ec38c6df410492847518dd1c00d79f88b38b5b8d3452551c90",
+    ".github/workflows/ci.yml": "a4000b8285ceed21cea9729890a1d483fbdb8ec768697a378c8c3e9b4951cad6"
+  }
+}

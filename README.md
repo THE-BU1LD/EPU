@@ -26,6 +26,10 @@ Run the deterministic software-invariant tests with:
 python -m unittest discover -s tests -p 'test_*.py' -v
 ```
 
+The [integrated reference record](docs/INTEGRATED_REFERENCE_20261010.md) identifies
+the combined numerical and simulator-verifier repairs, their reproduced
+failures, and the commands and evidence for this candidate.
+
 ## Hardware-parity boundary
 
 The intended fixed-point semantics are frozen in

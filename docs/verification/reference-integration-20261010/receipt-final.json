@@ -1,0 +1,114 @@
+{
+  "schema": "epu.engineering-integration.v1",
+  "date_utc": "2026-10-10",
+  "parents": [
+    "627e64c09339c09d9db4359056e345da929ffa46",
+    "92b0db58b179fef4dc74a2a368152fe4d3a0d7db"
+  ],
+  "evidence_scope": "Authored arithmetic regressions and retained golden consistency; no confirmatory outcome or hardware-performance run",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "baseline_checks": [
+    {
+      "label": "component-baseline",
+      "exit_code": 1,
+      "expected_failures": 5,
+      "log": "docs/verification/reference-integration-20261010/component-baseline.log",
+      "source_sha256": "c496fb4ae8edcd8146bfa078ebc2cece36a1e938df1c930ace50c09f94be2316"
+    },
+    {
+      "label": "review-beta-baseline",
+      "exit_code": 1,
+      "expected_failures": 1,
+      "log": "docs/verification/reference-integration-20261010/review-beta-baseline.log",
+      "source_sha256": "6ad101356a0e91b4220b0bfa2bd2335246d91743ee9b678d69fdc68f3f2c5265"
+    }
+  ],
+  "checks": [
+    {
+      "argv": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "docs/verification/reference-integration-20261010/final-check-1.log"
+    },
+    {
+      "argv": [
+        "python",
+        "scripts/generate_python_golden.py",
+        "--verify",
+        "examples/python_golden_vectors.json",
+        "--atol",
+        "1e-12"
+      ],
+      "exit_code": 0,
+      "log": "docs/verification/reference-integration-20261010/final-check-2.log"
+    },
+    {
+      "argv": [
+        "python",
+        "scripts/generate_hdl_golden.py",
+        "--verify",
+        "examples/hdl_fixed_golden_vectors.json"
+      ],
+      "exit_code": 0,
+      "log": "docs/verification/reference-integration-20261010/final-check-3.log"
+    },
+    {
+      "argv": [
+        "python",
+        "-m",
+        "ruff",
+        "check",
+        "--select",
+        "F",
+        "code/epu_reference.py",
+        "code/epu_fixed_reference.py",
+        "scripts/verify_hdl_parity.py",
+        "tests"
+      ],
+      "exit_code": 0,
+      "log": "docs/verification/reference-integration-20261010/final-check-4.log"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "docs/verification/reference-integration-20261010/final-check-5.log"
+    }
+  ],
+  "unittest_methods_passed": 40,
+  "new_methods": 5,
+  "local_iverilog": null,
+  "local_vvp": null,
+  "independent_source_review": "PASS; scalar-beta finding repaired",
+  "source_stable_during_checks": true,
+  "sha256": {
+    "code/epu_reference.py": "3f8da0f04da9177bdbd52082c410555c5f95f25d36210992ce4efba6c59d4537",
+    "code/epu_fixed_reference.py": "6e8d860cf759b7ffe245f45e3a2bef383c103e5dfa34c556e20ed7257e59c48d",
+    "code/epu_core.v": "134e892fc489d3c60b314b56ec511df948974bf20560fce519654b91d99aceec",
+    "scripts/verify_hdl_parity.py": "253ee305178d615741f967acbd7e5826af68f79358823bf16965581f66c94005",
+    "scripts/generate_python_golden.py": "7b10177f3a01efb1ed802caa5899a8cbba6a0a13a147f47cc6a7afb083d62c50",
+    "scripts/generate_hdl_golden.py": "e4b32c08e7521bf256ccb1ea3d455c71db621647d04557a03930fc30d7111d5b",
+    "tests/test_epu_reference.py": "dc7d98eff89b104f7e491a52fd1d50b39272b3f13d53e47f1646d32842f4274a",
+    "tests/test_hdl_transcript.py": "cd133b49624346d60294ff5babfe5a761e6566117ce9bff838f1403f98cb5df2",
+    "tests/test_integral_rounding.py": "b2ff9920e86bf95a03800b6ebb9591a30e09f9bf3e8d6848e1f1e879109cf428",
+    "tests/test_integral_vectors.py": "6b12b9722fbf58768fe6f0829c6abae7b89e9af3354d9adf1b070d57e9b698e2",
+    "tests/test_numeric_contract.py": "394e93c3ec9f3d617f14fcde4e41817890271caf990bf76caf699e36ddf17498",
+    "examples/python_golden_vectors.json": "f556b76e0e76c1e2450300c8e4d5f38a56c0c1313de71a7a3e325165a3a12bb5",
+    "examples/hdl_fixed_golden_vectors.json": "8b7e0272826fbc31910a4c82de82579782919a59d2847885573d4458dfe83c87",
+    "docs/HDL_FIXED_POINT_CONTRACT.md": "b9c7424ce23849ec38c6df410492847518dd1c00d79f88b38b5b8d3452551c90",
+    ".github/workflows/ci.yml": "a4000b8285ceed21cea9729890a1d483fbdb8ec768697a378c8c3e9b4951cad6"
+  }
+}

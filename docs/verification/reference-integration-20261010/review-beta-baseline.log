@@ -1,0 +1,25 @@
+test_complete_retrieval_uses_the_high_scoring_memory (test_integral_vectors.IntegralVectorTests.test_complete_retrieval_uses_the_high_scoring_memory) ... ok
+test_distance_preserves_full_integer_separation (test_integral_vectors.IntegralVectorTests.test_distance_preserves_full_integer_separation) ... ok
+test_dot_product_preserves_integer_multiplication (test_integral_vectors.IntegralVectorTests.test_dot_product_preserves_integer_multiplication) ... ok
+test_integer_beta_does_not_reintroduce_wrapping_scores (test_integral_vectors.IntegralVectorTests.test_integer_beta_does_not_reintroduce_wrapping_scores) ... FAIL
+test_normalization_does_not_reverse_extreme_score_order (test_integral_vectors.IntegralVectorTests.test_normalization_does_not_reverse_extreme_score_order) ... ok
+
+======================================================================
+FAIL: test_integer_beta_does_not_reintroduce_wrapping_scores (test_integral_vectors.IntegralVectorTests.test_integer_beta_does_not_reintroduce_wrapping_scores)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/epu-final-baseline-300jzh1d/tests/test_integral_vectors.py", line 62, in test_integer_beta_does_not_reintroduce_wrapping_scores
+    self.assertEqual(core.scores(), [-2**64, 2**64])
+AssertionError: Lists differ: [0, 0] != [-18446744073709551616, 18446744073709551616]
+
+First differing element 0:
+0
+-18446744073709551616
+
+- [0, 0]
++ [-18446744073709551616, 18446744073709551616]
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.002s
+
+FAILED (failures=1)
