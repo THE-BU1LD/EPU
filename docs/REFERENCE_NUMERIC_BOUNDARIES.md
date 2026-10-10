@@ -33,3 +33,19 @@ python scripts/verify_hdl_parity.py
 
 The last command requires Icarus Verilog. Arithmetic and boundary checks do not
 establish FPGA synthesis, speed, energy, capacity or hardware performance.
+
+## 10 October 2026 follow-up: exact Integral arithmetic
+
+The signed-rounding helper accepts `numbers.Integral`, which includes NumPy
+fixed-width scalar types. Arithmetic on those scalars could overflow before
+rounding: `int64(-2**63) / 3` was returned with the wrong sign, and the
+`uint64(2**64 - 1) / 3` case returned zero. Both admitted arguments are now
+converted to Python integers before negation, offset addition or division.
+The quotient/remainder oracle independently checks nearest rounding with ties
+away from zero across signed, unsigned and exact-half cases.
+
+All 21 local unittest methods pass, including six new subcases. The ordinary
+Python golden and all eight fixed-point steps still verify unchanged. Hosted
+CI installs NumPy 2.3.5 solely to exercise its real fixed-width scalar types;
+the reference implementation itself gains no NumPy dependency. The original
+HDL source and retained golden files are unchanged.
