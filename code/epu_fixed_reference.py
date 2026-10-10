@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import math
+from numbers import Integral, Real
 from typing import Sequence
 
 WORD_BITS = 16
@@ -26,14 +27,24 @@ MEMORIES_Q = tuple(tuple(value * SCALE for value in row) for row in MEMORIES)
 
 def round_div_signed(numerator: int, denominator: int) -> int:
     """Round a signed rational to nearest integer, ties away from zero."""
-    if denominator <= 0:
-        raise ValueError("denominator must be positive")
+    if isinstance(numerator, bool) or not isinstance(numerator, Integral):
+        raise ValueError("numerator must be an integer")
+    if isinstance(denominator, bool) or not isinstance(denominator, Integral) or denominator <= 0:
+        raise ValueError("denominator must be a positive integer")
     if numerator >= 0:
         return (numerator + denominator // 2) // denominator
     return -((-numerator + denominator // 2) // denominator)
 
 
 def quantize(value: float) -> int:
+    if isinstance(value, bool) or not isinstance(value, Real) or not math.isfinite(value):
+        raise ValueError("quantization input must be a finite real number")
+    # Saturate before multiplication, so a finite input such as 1e308 cannot
+    # overflow before reaching the contract's output clip.
+    if value <= CLIP_MIN_Q / SCALE:
+        return CLIP_MIN_Q
+    if value >= CLIP_MAX_Q / SCALE:
+        return CLIP_MAX_Q
     scaled = value * SCALE
     if scaled >= 0:
         quantized = math.floor(scaled + 0.5)
@@ -50,7 +61,13 @@ def step_q(state_q: Sequence[int]) -> dict[str, object]:
     if len(state_q) != 4:
         raise ValueError("retained parity contract requires four state coordinates")
 
-    state = [int(value) for value in state_q]
+    state = []
+    for value in state_q:
+        if isinstance(value, bool) or not isinstance(value, Integral):
+            raise ValueError("fixed-point state coordinates must be integers")
+        if not -(1 << (WORD_BITS - 1)) <= value < (1 << (WORD_BITS - 1)):
+            raise ValueError("fixed-point state coordinate exceeds signed word range")
+        state.append(int(value))
     scores_q: list[int] = []
     for memory in MEMORIES_Q:
         dot_raw = sum(left * right for left, right in zip(state, memory))
