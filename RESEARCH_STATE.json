@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "project": "EPU",
+  "updated_utc": "2026-10-10",
+  "current_phase": "ENGINEERING_DEVELOPMENT_REVIEW",
+  "scientific_disposition": "REFERENCE_IMPLEMENTATION; no new hardware result",
+  "scientific_scope_authority": [
+    "docs/REFERENCE_NUMERIC_BOUNDARIES.md",
+    "docs/HDL_FIXED_POINT_CONTRACT.md"
+  ],
+  "engineering_question": "Promote admitted Real scalars before floating-reference arithmetic",
+  "current_change": "Copy validated vector entries to Python float before subtraction and products. Keep the separate fixed-point reference unchanged.",
+  "required_session_reads": [
+    "docs/REFERENCE_NUMERIC_BOUNDARIES.md",
+    "docs/HDL_FIXED_POINT_CONTRACT.md",
+    "research/ENGINEERING_NUMERICAL_INTEGRITY_20261010.json"
+  ],
+  "protected_boundary": "Retained floating golden vectors pass at 1e-12; eight retained fixed-point steps pass exactly under the existing bound. Actual NumPy float16/int64 probes also pass. No HDL or performance claim changed.",
+  "protected_evaluation_opened": false,
+  "scientific_runs_this_revision": 0,
+  "research_complete": false,
+  "execution_budget": {
+    "scope": "bounded constructed regressions and existing correctness tests only",
+    "paid_compute": false,
+    "training_campaigns": 0,
+    "protected_runs": 0
+  },
+  "pending_gates": [
+    "Independent review and GitHub integration.",
+    "Scientific hypothesis/specification/methodology/freeze/evidence/release gates remain governed by the retained study contracts."
+  ],
+  "history": [
+    {
+      "date": "2026-10-10",
+      "kind": "engineering_revision",
+      "record": "research/ENGINEERING_NUMERICAL_INTEGRITY_20261010.json",
+      "status": "implemented; 30 bounded tests passed; integration pending",
+      "scientific_outcomes_created": false
+    }
+  ],
+  "history_index_scope": "Index to retained project records and this revision; not a reconstruction or replacement of the complete git/artifact history."
+}

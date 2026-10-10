@@ -16,7 +16,10 @@ def _vector(values, name):
         raise ValueError(f"{name} must be non-empty")
     for value in values:
         _finite(value, name)
-    return values
+    # This is the floating reference. Admitted Real implementations (including
+    # fixed-width integer and low-precision NumPy scalars) must not carry their
+    # wrapping/overflow arithmetic into vector products or shifted scores.
+    return [float(value) for value in values]
 
 def dot(a, b):
     a, b = _vector(a, "left vector"), _vector(b, "right vector")
