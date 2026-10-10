@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "kind": "ENGINEERING_INTEGRATION",
+  "date": "2026-10-10",
+  "repository": "THE-BU1LD/EPU",
+  "pull_request": 10,
+  "head_parent": "10009118dc5bcd99b180e5e5ca57533ede3201eb",
+  "base_parent": "b5921e6e8e9252d758210c96b24d2de062d009e4",
+  "merge_base": "38ea737c64c59e6986cb8c65b7e3a3d549e998cf",
+  "problem": "The current base independently added the same Integral promotion and a different test file at tests/test_integral_rounding.py; the PR also contains its original wrapping-Integral tests and a later floating-Real correction.",
+  "resolution": {
+    "code/epu_fixed_reference.py": "Use exact incoming base blob 01d2a4bd611bb02a53c168d8dbecb72b86b58919. Complete AST is identical to prior PR blob bfc9056bb6f464fac2c54d5f0d9a79ad41170b60; only the comment differs.",
+    "code/epu_reference.py": "Preserve exact current PR blob 0cce6d7978adfe528cc3539d7baec799bc8a14c4, including floating Real promotion.",
+    "tests/test_integral_rounding.py": "Preserve PR wrapping-Integral controls exactly as blob 2e058ec75de621d975c1b5d39720bc3cb752855b.",
+    "tests/test_numpy_integral_rounding.py": "Retain incoming NumPy controls byte for byte from base tests/test_integral_rounding.py, blob 0fb8c2c007a837c27fcefaa99da10a95fa8917a3, under a noncolliding discovery path.",
+    "tests/test_float_scalar_promotion.py": "Preserve current PR blob e61dd154465609525e39fa7334fc56915d81b953.",
+    ".github/workflows/ci.yml": "Use exact incoming base workflow including pinned NumPy 2.3.5 and explicit source-SHA checkout.",
+    "docs/REFERENCE_NUMERIC_BOUNDARIES.md": "Use exact incoming base document; its stated21-method result remains specific to that historical source."
+  },
+  "pre_verification_budget": {
+    "opened_utc": "2026-10-10T06:29:54.946842+00:00",
+    "local_correctness_invocations_max": 2,
+    "hosted_correctness_runs_max": 3,
+    "scope": "Existing31 deterministic unittest methods, existing generated arithmetic golden-vector checks, and existing eight-step HDL arithmetic parity only. No benchmark, training or new scientific hypothesis.",
+    "paid_compute": false,
+    "scientific_runs": 0,
+    "protected_runs": 0
+  },
+  "verification": {
+    "status": "LOCAL_PASSED",
+    "unittest_methods_passed": 31,
+    "local_correctness_invocations_used": 1,
+    "commands": [
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_*.py",
+          "-v"
+        ],
+        "exit_code": 0
+      },
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "scripts/generate_python_golden.py",
+          "--verify",
+          "examples/python_golden_vectors.json",
+          "--atol",
+          "1e-12"
+        ],
+        "exit_code": 0
+      },
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "scripts/generate_hdl_golden.py",
+          "--verify",
+          "examples/hdl_fixed_golden_vectors.json"
+        ],
+        "exit_code": 0
+      },
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "-m",
+          "ruff",
+          "check",
+          "--isolated",
+          "--select",
+          "E9,F821,F822,F823",
+          "code",
+          "tests"
+        ],
+        "exit_code": 0
+      },
+      {
+        "command": [
+          "bash",
+          "-n",
+          "scripts/run_demo.sh"
+        ],
+        "exit_code": 0
+      }
+    ],
+    "environment": {
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "device": "CPU",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1"
+      }
+    },
+    "source_and_test_sha256": {
+      "code/epu_reference.py": "35d93e492f4d0253e2aa0522cf64d9200087031cfaf659ec86ca69b57f476652",
+      "code/epu_fixed_reference.py": "31be3656f614130c1b9ec30fe4b1d0351aefff8e8edfd140b788765ede15e818",
+      "tests/test_integral_rounding.py": "b2ff9920e86bf95a03800b6ebb9591a30e09f9bf3e8d6848e1f1e879109cf428",
+      "tests/test_numpy_integral_rounding.py": "fb24ac6731973b1662dc29e017f56b9c14389b7a656527f388ccaf6da5b7693b",
+      "tests/test_float_scalar_promotion.py": "0683b8060b52cf5594d0281d1fdb8063d8a992c3240d5e357bf798396da34614",
+      ".github/workflows/ci.yml": "32c57d3c210789f6908c058a789cb88bcbe5895ee66fa29fd6ae0c3aae2ce548"
+    },
+    "source_hashes_unchanged_after_execution": true,
+    "log": "research/INTEGRATED_SCALAR_REFERENCE_20261010_local.txt",
+    "log_sha256": "08b5b7059590f6587929d0df519c82333490b051dd31065c397eec842e27ffa0",
+    "hosted": "pending; existing HDL parity gate will run on published exact source"
+  },
+  "independent_review": {
+    "status": "APPROVED",
+    "reviewer": "independent apen_fim agent",
+    "scope": "Read-only review of exact parent packet, all26 head paths/modes, selected incoming blobs, fixed-reference complete AST equality, both original regression files and renamed real-NumPy controls,31-method discovery, canonical authority/history preservation, source/log hashes and existing verification logs. No tests rerun.",
+    "findings": "No blocking finding. Parent graph independently verified by root: head10009118 ->627e64 ->38ea737; incomingbaseb5921e6 ->38ea737."
+  },
+  "historical_record": "research/ENGINEERING_NUMERICAL_INTEGRITY_20261010.json",
+  "scientific_disposition": "REFERENCE_IMPLEMENTATION; no new hardware result",
+  "research_complete": false,
+  "preservation": "Retain both exact commit parents, historical engineering record, HDL and golden blobs, earlier failures and all existing scientific boundaries.",
+  "integration": {
+    "status": "READY_TO_PUBLISH",
+    "strategy": "True two-parent merge commit, first parent current PR head10009118, second parent current baseb5921e6. Exact expected-head ref update, without force.",
+    "declared_changes_relative_to_head": 7,
+    "other_head_files_preserved": 22
+  }
+}

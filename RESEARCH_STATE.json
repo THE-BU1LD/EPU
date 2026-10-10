@@ -13,7 +13,8 @@
   "required_session_reads": [
     "docs/REFERENCE_NUMERIC_BOUNDARIES.md",
     "docs/HDL_FIXED_POINT_CONTRACT.md",
-    "research/ENGINEERING_NUMERICAL_INTEGRITY_20261010.json"
+    "research/ENGINEERING_NUMERICAL_INTEGRITY_20261010.json",
+    "research/INTEGRATED_SCALAR_REFERENCE_20261010.json"
   ],
   "protected_boundary": "Retained floating golden vectors pass at 1e-12; eight retained fixed-point steps pass exactly under the existing bound. Actual NumPy float16/int64 probes also pass. No HDL or performance claim changed.",
   "protected_evaluation_opened": false,
@@ -36,7 +37,20 @@
       "record": "research/ENGINEERING_NUMERICAL_INTEGRITY_20261010.json",
       "status": "implemented; 30 bounded tests passed; integration pending",
       "scientific_outcomes_created": false
+    },
+    {
+      "date": "2026-10-10",
+      "kind": "engineering_integration",
+      "record": "research/INTEGRATED_SCALAR_REFERENCE_20261010.json",
+      "status": "independently reviewed;31 local methods and retained arithmetic golden checks passed; hosted verification pending",
+      "scientific_outcomes_created": false
     }
   ],
-  "history_index_scope": "Index to retained project records and this revision; not a reconstruction or replacement of the complete git/artifact history."
+  "history_index_scope": "Index to retained project records and this revision; not a reconstruction or replacement of the complete git/artifact history.",
+  "active_integration": {
+    "record": "research/INTEGRATED_SCALAR_REFERENCE_20261010.json",
+    "status": "REVIEWED_LOCAL_PASSED_HOSTED_PENDING",
+    "head_parent": "10009118dc5bcd99b180e5e5ca57533ede3201eb",
+    "base_parent": "b5921e6e8e9252d758210c96b24d2de062d009e4"
+  }
 }
