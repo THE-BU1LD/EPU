@@ -66,6 +66,62 @@ def build_testbench(golden: dict[str, object]) -> str:
     return "\n".join(lines)
 
 
+def verify_simulator_output(
+    stdout: str, golden: dict[str, object], *, stderr: str = ""
+) -> None:
+    """Require one exact, ordered observation for every retained input step.
+
+    Never replace an earlier observation of a step with a later one. A duplicate
+    or malformed RESULT is an invalid transcript, even if another row matches.
+    """
+    for stream_name, stream in (("stdout", stdout), ("stderr", stderr)):
+        for line_number, raw_line in enumerate(stream.splitlines(), start=1):
+            line = raw_line.strip()
+            if line.startswith(("ERROR:", "FATAL:")):
+                raise AssertionError(
+                    f"simulator diagnostic on {stream_name} line {line_number}: {line}"
+                )
+    expected_steps = golden["steps"]
+    observed_count = 0
+    for line_number, raw_line in enumerate(stdout.splitlines(), start=1):
+        line = raw_line.strip()
+        match = RESULT_RE.fullmatch(line)
+        if not match:
+            if line.startswith("RESULT"):
+                raise AssertionError(
+                    f"malformed simulator RESULT on line {line_number}: {line}"
+                )
+            continue
+        if observed_count >= len(expected_steps):
+            raise AssertionError(f"unexpected extra simulator RESULT: {line}")
+        row = expected_steps[observed_count]
+        step = int(match.group("step"))
+        expected_step = int(row["step"])
+        if step != expected_step:
+            raise AssertionError(
+                f"simulator RESULT {observed_count}: expected step {expected_step}, "
+                f"got {step}; duplicate or reordered steps are invalid"
+            )
+        actual_state = [int(match.group(f"z{index}")) for index in range(4)]
+        expected_state = [int(value) for value in row["next_q"]]
+        if actual_state != expected_state:
+            raise AssertionError(
+                f"step {step}: HDL state {actual_state} != fixed golden {expected_state}"
+            )
+        actual_converged = match.group("converged") == "1"
+        expected_converged = bool(row["converged"])
+        if actual_converged != expected_converged:
+            raise AssertionError(
+                f"step {step}: HDL converged={actual_converged} "
+                f"!= fixed golden {expected_converged}"
+            )
+        observed_count += 1
+    if observed_count != len(expected_steps):
+        raise AssertionError(
+            f"expected {len(expected_steps)} simulator rows, got {observed_count}"
+        )
+
+
 def main() -> None:
     if shutil.which("iverilog") is None or shutil.which("vvp") is None:
         raise SystemExit("iverilog and vvp are required for HDL parity verification")
@@ -112,36 +168,8 @@ def main() -> None:
                 "HDL simulation failed:\n" + run_result.stdout + run_result.stderr
             )
 
-    observed: dict[int, tuple[list[int], bool]] = {}
-    for raw_line in run_result.stdout.splitlines():
-        match = RESULT_RE.match(raw_line.strip())
-        if not match:
-            continue
-        step = int(match.group("step"))
-        state = [int(match.group(f"z{index}")) for index in range(4)]
-        observed[step] = (state, match.group("converged") == "1")
-
+    verify_simulator_output(run_result.stdout, retained, stderr=run_result.stderr)
     expected_steps = retained["steps"]
-    if len(observed) != len(expected_steps):
-        raise AssertionError(
-            f"expected {len(expected_steps)} simulator rows, got {len(observed)}\n"
-            + run_result.stdout
-        )
-
-    for row in expected_steps:
-        step = int(row["step"])
-        expected_state = [int(value) for value in row["next_q"]]
-        expected_converged = bool(row["converged"])
-        actual_state, actual_converged = observed[step]
-        if actual_state != expected_state:
-            raise AssertionError(
-                f"step {step}: HDL state {actual_state} != fixed golden {expected_state}"
-            )
-        if actual_converged != expected_converged:
-            raise AssertionError(
-                f"step {step}: HDL converged={actual_converged} "
-                f"!= fixed golden {expected_converged}"
-            )
 
     print(
         f"verified HDL parity for {len(expected_steps)} retained steps; "
