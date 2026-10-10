@@ -42,15 +42,18 @@
       "date": "2026-10-10",
       "kind": "engineering_integration",
       "record": "research/INTEGRATED_SCALAR_REFERENCE_20261010.json",
-      "status": "independently reviewed;31 local methods and retained arithmetic golden checks passed; hosted verification pending",
+      "status": "published draft; independently reviewed;31 local and hosted methods, retained golden vectors and8-step HDL parity passed on integration1d0a5e8",
       "scientific_outcomes_created": false
     }
   ],
   "history_index_scope": "Index to retained project records and this revision; not a reconstruction or replacement of the complete git/artifact history.",
   "active_integration": {
     "record": "research/INTEGRATED_SCALAR_REFERENCE_20261010.json",
-    "status": "REVIEWED_LOCAL_PASSED_HOSTED_PENDING",
+    "status": "CLOSED_PUBLISHED_DRAFT",
     "head_parent": "10009118dc5bcd99b180e5e5ca57533ede3201eb",
-    "base_parent": "b5921e6e8e9252d758210c96b24d2de062d009e4"
+    "base_parent": "b5921e6e8e9252d758210c96b24d2de062d009e4",
+    "published_merge_commit": "1d0a5e8ee9e22f9fb3bcf50150f1296e919cf1d0",
+    "hosted_run": "https://github.com/THE-BU1LD/EPU/actions/runs/38031362681",
+    "scientific_result_created": false
   }
 }

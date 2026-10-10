@@ -27,7 +27,7 @@
     "protected_runs": 0
   },
   "verification": {
-    "status": "LOCAL_PASSED",
+    "status": "LOCAL_AND_HOSTED_PASSED",
     "unittest_methods_passed": 31,
     "local_correctness_invocations_used": 1,
     "commands": [
@@ -109,12 +109,42 @@
     "source_hashes_unchanged_after_execution": true,
     "log": "research/INTEGRATED_SCALAR_REFERENCE_20261010_local.txt",
     "log_sha256": "08b5b7059590f6587929d0df519c82333490b051dd31065c397eec842e27ffa0",
-    "hosted": "pending; existing HDL parity gate will run on published exact source"
+    "hosted": {
+      "schema_version": 1,
+      "repository": "THE-BU1LD/EPU",
+      "run_id": 38031362681,
+      "job_id": 114152813849,
+      "run_url": "https://github.com/THE-BU1LD/EPU/actions/runs/38031362681",
+      "tested_commit": "1d0a5e8ee9e22f9fb3bcf50150f1296e919cf1d0",
+      "tested_tree": "40536bec26995d9dc1b75cb8482178d3fd23a335",
+      "conclusion": "success",
+      "unit_test_methods": 31,
+      "unit_test_seconds": 0.061,
+      "python_versions_observed": [
+        "3.11.17"
+      ],
+      "numpy": "2.3.5",
+      "exact_source_checkout_and_assertion_passed": true,
+      "retained_float_golden_tolerance": 1e-12,
+      "retained_fixed_golden_steps": 8,
+      "hdl_steps": 8,
+      "hdl_fixed_point_match": "exact",
+      "float_reference_error_bound": 0.00390625,
+      "verified_evidence_lines": [
+        "2026-10-10T06:33:45.0829649Z \u001b[36;1mtest \"$(git rev-parse HEAD)\" = \"$SOURCE_SHA\"\u001b[0m",
+        "2026-10-10T06:33:48.8405472Z Successfully installed numpy-2.3.5",
+        "2026-10-10T06:33:49.1258975Z Ran 31 tests in 0.061s",
+        "2026-10-10T06:33:49.2766663Z verified examples/python_golden_vectors.json against current Python reference (atol=1e-12)",
+        "2026-10-10T06:33:57.9839907Z verified examples/hdl_fixed_golden_vectors.json: 8 steps, fixed-point error <= 0.00390625",
+        "2026-10-10T06:33:58.1867597Z verified HDL parity for 8 retained steps; exact fixed-point match and <= 0.00390625 vs float reference"
+      ]
+    },
+    "hosted_correctness_runs_recorded": 1
   },
   "independent_review": {
     "status": "APPROVED",
     "reviewer": "independent apen_fim agent",
-    "scope": "Read-only review of exact parent packet, all26 head paths/modes, selected incoming blobs, fixed-reference complete AST equality, both original regression files and renamed real-NumPy controls,31-method discovery, canonical authority/history preservation, source/log hashes and existing verification logs. No tests rerun.",
+    "scope": "Read-only review of exact parent packet, all26 head paths/modes, selected incoming blobs, fixed-reference complete AST equality, both original regression files and renamed real-NumPy controls,31-method discovery, canonical authority/history preservation, source/log hashes and existing verification logs. No tests rerun. Reviewer also independently fetched both complete GitHub trees and verified both ancestry chains to the declared common ancestor.",
     "findings": "No blocking finding. Parent graph independently verified by root: head10009118 ->627e64 ->38ea737; incomingbaseb5921e6 ->38ea737."
   },
   "historical_record": "research/ENGINEERING_NUMERICAL_INTEGRITY_20261010.json",
@@ -122,9 +152,14 @@
   "research_complete": false,
   "preservation": "Retain both exact commit parents, historical engineering record, HDL and golden blobs, earlier failures and all existing scientific boundaries.",
   "integration": {
-    "status": "READY_TO_PUBLISH",
+    "status": "PUBLISHED_DRAFT; direct base conflict resolved; review/integration into main pending",
     "strategy": "True two-parent merge commit, first parent current PR head10009118, second parent current baseb5921e6. Exact expected-head ref update, without force.",
     "declared_changes_relative_to_head": 7,
-    "other_head_files_preserved": 22
+    "other_head_files_preserved": 22,
+    "published_merge_commit": "1d0a5e8ee9e22f9fb3bcf50150f1296e919cf1d0",
+    "published_tree": "40536bec26995d9dc1b75cb8482178d3fd23a335",
+    "verified_remote_leaf_paths_and_modes": 29,
+    "all_other_head_blobs_preserved": true,
+    "receipt_successor_scope": "Only this verification record and canonical state are updated after the named hosted run; implementation/test/workflow bytes remain unchanged."
   }
 }
