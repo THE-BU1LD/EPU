@@ -1,0 +1,49 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python -m unittest discover -s tests -p test_*.py -v
+test_clip_and_l1_contracts (test_epu_reference.EPUReferenceTests.test_clip_and_l1_contracts) ... ok
+test_default_memory_shapes_match_declared_dimension (test_epu_reference.EPUReferenceTests.test_default_memory_shapes_match_declared_dimension) ... ok
+test_equal_scores_normalize_uniformly (test_epu_reference.EPUReferenceTests.test_equal_scores_normalize_uniformly) ... ok
+test_normalize_is_nonnegative_and_sums_to_one (test_epu_reference.EPUReferenceTests.test_normalize_is_nonnegative_and_sums_to_one) ... ok
+test_run_is_deterministic_for_same_initial_state (test_epu_reference.EPUReferenceTests.test_run_is_deterministic_for_same_initial_state) ... ok
+test_step_preserves_dimensionality_and_finite_values (test_epu_reference.EPUReferenceTests.test_step_preserves_dimensionality_and_finite_values) ... ok
+test_dot_does_not_use_fixed_width_integer_products (test_float_scalar_promotion.FloatScalarPromotionTests.test_dot_does_not_use_fixed_width_integer_products) ... ok
+test_dot_promotes_low_precision_float_before_product (test_float_scalar_promotion.FloatScalarPromotionTests.test_dot_promotes_low_precision_float_before_product) ... ok
+test_l1_does_not_wrap_fixed_width_differences (test_float_scalar_promotion.FloatScalarPromotionTests.test_l1_does_not_wrap_fixed_width_differences) ... ok
+test_ordinary_python_arithmetic_and_golden_scale_are_unchanged (test_float_scalar_promotion.FloatScalarPromotionTests.test_ordinary_python_arithmetic_and_golden_scale_are_unchanged) ... ok
+test_shifted_normalization_does_not_wrap_fixed_width_subtraction (test_float_scalar_promotion.FloatScalarPromotionTests.test_shifted_normalization_does_not_wrap_fixed_width_subtraction) ... ok
+test_arbitrary_precision_and_signed_half_ties_remain_exact (test_integral_rounding.IntegralRoundingTests.test_arbitrary_precision_and_signed_half_ties_remain_exact) ... ok
+test_large_denominator_does_not_overflow_rounding_offset (test_integral_rounding.IntegralRoundingTests.test_large_denominator_does_not_overflow_rounding_offset) ... ok
+test_large_positive_rounding_does_not_wrap_sign (test_integral_rounding.IntegralRoundingTests.test_large_positive_rounding_does_not_wrap_sign) ... ok
+test_minimum_signed_integer_is_not_negated_in_fixed_width (test_integral_rounding.IntegralRoundingTests.test_minimum_signed_integer_is_not_negated_in_fixed_width) ... ok
+test_result_has_unbounded_python_integer_semantics (test_integral_rounding.IntegralRoundingTests.test_result_has_unbounded_python_integer_semantics) ... ok
+test_core_rejects_inconsistent_state_and_memory_dimensions (test_numeric_contract.NumericContractTests.test_core_rejects_inconsistent_state_and_memory_dimensions) ... ok
+test_custom_consistent_dimension_remains_supported_in_float_reference (test_numeric_contract.NumericContractTests.test_custom_consistent_dimension_remains_supported_in_float_reference) ... ok
+test_fixed_point_cannot_silently_coerce_fractional_or_out_of_word_states (test_numeric_contract.NumericContractTests.test_fixed_point_cannot_silently_coerce_fractional_or_out_of_word_states) ... ok
+test_full_signed_word_boundaries_are_valid_inputs (test_numeric_contract.NumericContractTests.test_full_signed_word_boundaries_are_valid_inputs) ... ok
+test_invalid_parameters_and_step_budget_are_rejected (test_numeric_contract.NumericContractTests.test_invalid_parameters_and_step_budget_are_rejected) ... ok
+test_mutated_invalid_state_is_rejected_without_updating_previous_state (test_numeric_contract.NumericContractTests.test_mutated_invalid_state_is_rejected_without_updating_previous_state) ... ok
+test_nan_cannot_be_clipped_into_a_valid_state (test_numeric_contract.NumericContractTests.test_nan_cannot_be_clipped_into_a_valid_state) ... ok
+test_normalization_rejects_nonfinite_and_ambiguous_inputs (test_numeric_contract.NumericContractTests.test_normalization_rejects_nonfinite_and_ambiguous_inputs) ... ok
+test_ordinary_normalization_keeps_original_arithmetic (test_numeric_contract.NumericContractTests.test_ordinary_normalization_keeps_original_arithmetic) ... ok
+test_quantization_preserves_half_ties_away_from_zero (test_numeric_contract.NumericContractTests.test_quantization_preserves_half_ties_away_from_zero) ... ok
+test_quantization_saturates_large_finite_inputs_before_scaling (test_numeric_contract.NumericContractTests.test_quantization_saturates_large_finite_inputs_before_scaling) ... ok
+test_shifted_normalization_handles_finite_subtraction_and_sum_overflow (test_numeric_contract.NumericContractTests.test_shifted_normalization_handles_finite_subtraction_and_sum_overflow) ... ok
+test_signed_rounding_requires_integer_inputs (test_numeric_contract.NumericContractTests.test_signed_rounding_requires_integer_inputs) ... ok
+test_vector_operations_reject_silent_zip_truncation (test_numeric_contract.NumericContractTests.test_vector_operations_reject_silent_zip_truncation) ... ok
+test_machine_width_integer_arithmetic_is_promoted_before_rounding (test_numpy_integral_rounding.IntegralRoundingTests.test_machine_width_integer_arithmetic_is_promoted_before_rounding) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 0.124s
+
+OK
+
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python scripts/generate_python_golden.py --verify examples/python_golden_vectors.json --atol 1e-12
+verified examples/python_golden_vectors.json against current Python reference (atol=1e-12)
+
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python scripts/generate_hdl_golden.py --verify examples/hdl_fixed_golden_vectors.json
+verified examples/hdl_fixed_golden_vectors.json: 8 steps, fixed-point error <= 0.00390625
+
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python -m ruff check --isolated --select E9,F821,F822,F823 code tests
+All checks passed!
+
+$ bash -n scripts/run_demo.sh
+

@@ -1,0 +1,71 @@
+test_complete_retrieval_uses_the_high_scoring_memory (test_integral_vectors.IntegralVectorTests.test_complete_retrieval_uses_the_high_scoring_memory) ... FAIL
+test_distance_preserves_full_integer_separation (test_integral_vectors.IntegralVectorTests.test_distance_preserves_full_integer_separation) ... FAIL
+test_dot_product_preserves_integer_multiplication (test_integral_vectors.IntegralVectorTests.test_dot_product_preserves_integer_multiplication) ... FAIL
+test_integer_beta_does_not_reintroduce_wrapping_scores (test_integral_vectors.IntegralVectorTests.test_integer_beta_does_not_reintroduce_wrapping_scores) ... FAIL
+test_normalization_does_not_reverse_extreme_score_order (test_integral_vectors.IntegralVectorTests.test_normalization_does_not_reverse_extreme_score_order) ... FAIL
+
+======================================================================
+FAIL: test_complete_retrieval_uses_the_high_scoring_memory (test_integral_vectors.IntegralVectorTests.test_complete_retrieval_uses_the_high_scoring_memory)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/epu-final-baseline-i94jrdat/tests/test_integral_vectors.py", line 53, in test_complete_retrieval_uses_the_high_scoring_memory
+    self.assertEqual(result["scores"], [float(-2**64), float(2**64)])
+AssertionError: Lists differ: [0.0, 0.0] != [-1.8446744073709552e+19, 1.8446744073709552e+19]
+
+First differing element 0:
+0.0
+-1.8446744073709552e+19
+
+- [0.0, 0.0]
++ [-1.8446744073709552e+19, 1.8446744073709552e+19]
+
+======================================================================
+FAIL: test_distance_preserves_full_integer_separation (test_integral_vectors.IntegralVectorTests.test_distance_preserves_full_integer_separation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/epu-final-baseline-i94jrdat/tests/test_integral_vectors.py", line 37, in test_distance_preserves_full_integer_separation
+    self.assertEqual(l1([Signed64(-2**63)], [Signed64(2**63 - 1)]), 2**64 - 1)
+AssertionError: 1 != 18446744073709551615
+
+======================================================================
+FAIL: test_dot_product_preserves_integer_multiplication (test_integral_vectors.IntegralVectorTests.test_dot_product_preserves_integer_multiplication)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/epu-final-baseline-i94jrdat/tests/test_integral_vectors.py", line 33, in test_dot_product_preserves_integer_multiplication
+    self.assertEqual(actual, 2**64)
+AssertionError: 0 != 18446744073709551616
+
+======================================================================
+FAIL: test_integer_beta_does_not_reintroduce_wrapping_scores (test_integral_vectors.IntegralVectorTests.test_integer_beta_does_not_reintroduce_wrapping_scores)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/epu-final-baseline-i94jrdat/tests/test_integral_vectors.py", line 62, in test_integer_beta_does_not_reintroduce_wrapping_scores
+    self.assertEqual(core.scores(), [-2**64, 2**64])
+AssertionError: Lists differ: [0, 0] != [-18446744073709551616, 18446744073709551616]
+
+First differing element 0:
+0
+-18446744073709551616
+
+- [0, 0]
++ [-18446744073709551616, 18446744073709551616]
+
+======================================================================
+FAIL: test_normalization_does_not_reverse_extreme_score_order (test_integral_vectors.IntegralVectorTests.test_normalization_does_not_reverse_extreme_score_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/epu-final-baseline-i94jrdat/tests/test_integral_vectors.py", line 44, in test_normalization_does_not_reverse_extreme_score_order
+    self.assertEqual(normalize([Signed64(low), Signed64(high)]), expected)
+AssertionError: Lists differ: [1.0, 0.0] != [5.421010862427522e-20, 1.0]
+
+First differing element 0:
+1.0
+5.421010862427522e-20
+
+- [1.0, 0.0]
++ [5.421010862427522e-20, 1.0]
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.014s
+
+FAILED (failures=5)

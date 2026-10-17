@@ -1,0 +1,1 @@
+verified examples/python_golden_vectors.json against current Python reference (atol=1e-12)
