@@ -16,10 +16,9 @@ def _vector(values, name):
         raise ValueError(f"{name} must be non-empty")
     for value in values:
         _finite(value, name)
-    # A fixed-width Integral (for example a NumPy scalar) can wrap before a
-    # later float calculation sees it. Preserve its exact value in Python's
-    # unbounded integers before multiplication, differences or normalization.
-    return [int(value) if isinstance(value, Integral) else value for value in values]
+    # Preserve exact integer values, while promoting other Real implementations
+    # before their fixed-width or low-precision arithmetic can wrap or overflow.
+    return [int(value) if isinstance(value, Integral) else float(value) for value in values]
 
 def dot(a, b):
     a, b = _vector(a, "left vector"), _vector(b, "right vector")
@@ -103,17 +102,20 @@ class EPUCore:
 
     def scores(self):
         self._validate()
-        beta = int(self.beta) if isinstance(self.beta, Integral) else self.beta
+        beta = int(self.beta) if isinstance(self.beta, Integral) else float(self.beta)
         return [beta * dot(self.z, m) for m in self.memories]
 
     def step(self):
         s = self.scores()
         w = normalize(s)
+        state = _vector(self.z, "state")
+        memories = [_vector(memory, "memory") for memory in self.memories]
+        alpha = float(self.alpha)
         recon = [0.0] * self.dim
-        for wi, m in zip(w, self.memories):
+        for wi, m in zip(w, memories):
             for i in range(self.dim):
                 recon[i] += wi * m[i]
-        next_z = [self.alpha * self.z[i] + (1.0 - self.alpha) * recon[i] for i in range(self.dim)]
+        next_z = [alpha * state[i] + (1.0 - alpha) * recon[i] for i in range(self.dim)]
         next_z = clip(next_z)
         info = {
             "state": self.z[:],

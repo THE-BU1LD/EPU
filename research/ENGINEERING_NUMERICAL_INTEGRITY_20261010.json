@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-10",
+  "kind": "ENGINEERING_CORRECTNESS_REVISION",
+  "repository": "THE-BU1LD/EPU",
+  "parent_commit": "627e64c09339c09d9db4359056e345da929ffa46",
+  "existing_draft_pr": 10,
+  "title": "Promote admitted Real scalars before floating-reference arithmetic",
+  "observation": "NumPy int64 shifted normalization reverses the extreme-value weights; low-precision dot products overflow even where a Python float result is finite.",
+  "cause": "Validation admits Real scalar types but vector arithmetic still runs in each caller's wrapping or low-precision scalar implementation.",
+  "severity": "incorrect arithmetic, state or evidence admission on valid/ambiguous boundary inputs",
+  "implemented_change": "Copy validated vector entries to Python float before subtraction and products. Keep the separate fixed-point reference unchanged.",
+  "predicted_consequence": "New constructed regressions fail on the recorded parent and pass after the repair while the existing bounded suite passes.",
+  "evidence": {
+    "pre_fix_new_tests_failed": 4,
+    "pre_fix_control_tests_passed": 1,
+    "post_fix_suite_tests_passed": 30,
+    "command": "PYTHONPATH=. OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m pytest -q tests",
+    "environment": {
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "torch": "2.14.1+cpu",
+      "pytest": "9.1.1",
+      "device": "CPU"
+    },
+    "critical_static_checks": "Ruff E9,F821,F822,F823 passed for all changed Python files",
+    "compilation": "All changed Python sources compiled",
+    "whitespace": "git diff --check passed"
+  },
+  "changed_python_sha256": {
+    "code/epu_reference.py": "35d93e492f4d0253e2aa0522cf64d9200087031cfaf659ec86ca69b57f476652",
+    "tests/test_float_scalar_promotion.py": "0683b8060b52cf5594d0281d1fdb8063d8a992c3240d5e357bf798396da34614"
+  },
+  "scientific_runs": 0,
+  "scientific_result_changed": false,
+  "scientific_disposition": "REFERENCE_IMPLEMENTATION; no new hardware result",
+  "protected_boundary": "Retained floating golden vectors pass at 1e-12; eight retained fixed-point steps pass exactly under the existing bound. Actual NumPy float16/int64 probes also pass. No HDL or performance claim changed.",
+  "research_complete": false,
+  "independent_review": "pending",
+  "integration": "draft pull request; not merged",
+  "release_gate": "Review/integrate the implementation and retain source identities; scientific successors remain separately gated."
+}
