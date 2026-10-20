@@ -1,0 +1,10 @@
+{
+  "cartesian_cells": 27648,
+  "claim_boundary": "Exploratory synthetic mechanism evidence only; no real-data efficacy, confirmation, novelty, or submission claim.",
+  "deterministic_replay": true,
+  "evidence_role": "EXPLORATORY_SUCCESSOR_INFORMED_BY_V1_V4",
+  "records": 27648,
+  "run_manifest_sha256": "792ec09e196938220251b0ac477610281d4eee866c7dba2c7a0439a51d767270",
+  "source_files_verified": 6,
+  "status": "PASS_V5_ADVERSARIAL_AUDIT"
+}
