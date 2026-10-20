@@ -1,0 +1,40 @@
+% Generated from the audited V5 aggregate.
+\begin{table*}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3.5pt}
+\caption{V5 exploratory synthetic results. Accuracy, mean query displacement, prediction-change rate, and score evaluations are means across eight simulation seeds.}
+\label{tab:v5-results}
+\begin{tabular}{llrrrr}
+\toprule
+Family & Method & Accuracy & Displacement & Changed & Score evals \\
+\midrule
+distractor & direct\_mean & 0.959 & 0.000 & 0.000 & 2 \\
+distractor & original\_mean & 0.959 & 0.783 & 0.000 & 18 \\
+distractor & anchor\_mean & 0.959 & 0.077 & 0.000 & 18 \\
+distractor & direct\_multi & 0.968 & 0.000 & 0.000 & 4 \\
+distractor & original\_topk & 0.968 & 0.241 & 0.000 & 36 \\
+distractor & anchor\_topk & 0.968 & 0.020 & 0.000 & 36 \\
+distractor & direct\_full & 0.961 & 0.000 & 0.000 & 96 \\
+distractor & knn & 0.977 & 0.000 & 0.000 & 96 \\
+\midrule
+multimodal & direct\_mean & 0.497 & 0.000 & 0.000 & 2 \\
+multimodal & original\_mean & 0.497 & 0.896 & 0.000 & 18 \\
+multimodal & anchor\_mean & 0.497 & 0.087 & 0.000 & 18 \\
+multimodal & direct\_multi & 1.000 & 0.000 & 0.000 & 4 \\
+multimodal & original\_topk & 1.000 & 0.140 & 0.000 & 36 \\
+multimodal & anchor\_topk & 1.000 & 0.013 & 0.000 & 36 \\
+multimodal & direct\_full & 1.000 & 0.000 & 0.000 & 96 \\
+multimodal & knn & 1.000 & 0.000 & 0.000 & 96 \\
+\midrule
+unimodal & direct\_mean & 1.000 & 0.000 & 0.000 & 2 \\
+unimodal & original\_mean & 1.000 & 0.188 & 0.000 & 18 \\
+unimodal & anchor\_mean & 1.000 & 0.019 & 0.000 & 18 \\
+unimodal & direct\_multi & 1.000 & 0.000 & 0.000 & 4 \\
+unimodal & original\_topk & 1.000 & 0.191 & 0.000 & 36 \\
+unimodal & anchor\_topk & 1.000 & 0.016 & 0.000 & 36 \\
+unimodal & direct\_full & 1.000 & 0.000 & 0.000 & 96 \\
+unimodal & knn & 1.000 & 0.000 & 0.000 & 96 \\
+\bottomrule
+\end{tabular}
+\end{table*}
