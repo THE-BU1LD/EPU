@@ -1,0 +1,86 @@
+{
+  "outcomes": [
+    {
+      "family": "multimodal",
+      "id": "H-V5-REPRESENTATION",
+      "left": "direct_multi",
+      "metric": "mean_accuracy",
+      "minimum_delta": 0.25,
+      "observed_delta": 0.5034722222222222,
+      "observed_left": 1.0,
+      "observed_right": 0.4965277777777778,
+      "right": "direct_mean",
+      "status": "PASS"
+    },
+    {
+      "family": "distractor",
+      "id": "H-V5-ANCHOR-STABILITY",
+      "left": "original_mean",
+      "metric": "mean_displacement",
+      "minimum_delta": 0.1,
+      "observed_delta": 0.7059349500935872,
+      "observed_left": 0.7829367523347318,
+      "observed_right": 0.07700180224114467,
+      "right": "anchor_mean",
+      "status": "PASS"
+    },
+    {
+      "family": "distractor",
+      "id": "H-V5-RECURRENT-UTILITY",
+      "left": "anchor_topk",
+      "metric": "mean_accuracy",
+      "minimum_delta": 0.01,
+      "observed_delta": 0.0,
+      "observed_left": 0.9678819444444444,
+      "observed_right": 0.9678819444444444,
+      "right": "direct_multi",
+      "status": "FAIL"
+    },
+    {
+      "family": "distractor",
+      "id": "H-V5-FULL-BANK",
+      "left": "knn",
+      "metric": "mean_accuracy",
+      "minimum_delta": 0.05,
+      "observed_delta": 0.00954861111111116,
+      "observed_left": 0.9774305555555556,
+      "observed_right": 0.9678819444444444,
+      "right": "direct_multi",
+      "status": "FAIL"
+    }
+  ],
+  "pre_specified_for_v5": [
+    {
+      "family": "multimodal",
+      "id": "H-V5-REPRESENTATION",
+      "left": "direct_multi",
+      "metric": "mean_accuracy",
+      "minimum_delta": 0.25,
+      "right": "direct_mean"
+    },
+    {
+      "family": "distractor",
+      "id": "H-V5-ANCHOR-STABILITY",
+      "left": "original_mean",
+      "metric": "mean_displacement",
+      "minimum_delta": 0.1,
+      "right": "anchor_mean"
+    },
+    {
+      "family": "distractor",
+      "id": "H-V5-RECURRENT-UTILITY",
+      "left": "anchor_topk",
+      "metric": "mean_accuracy",
+      "minimum_delta": 0.01,
+      "right": "direct_multi"
+    },
+    {
+      "family": "distractor",
+      "id": "H-V5-FULL-BANK",
+      "left": "knn",
+      "metric": "mean_accuracy",
+      "minimum_delta": 0.05,
+      "right": "direct_multi"
+    }
+  ]
+}
