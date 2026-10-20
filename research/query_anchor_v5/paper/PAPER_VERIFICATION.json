@@ -1,0 +1,24 @@
+{
+  "claim_boundary": "Exploratory synthetic mechanism paper; real E5-R1 digits execution remains BLOCKED_RESOURCE.",
+  "nonempty_pages": 10,
+  "pages": 10,
+  "pdf_sha256": "8b13fdea674b6ff49604459b03bc2fe2213e5919a79a307776cd14bb8f17fd92",
+  "required_phrases_verified": [
+    "Query Anchoring Stabilizes Associative Retrieval",
+    "RECURRENT-UTILITY",
+    "27,648",
+    "BLOCKED_RESOURCE",
+    "Reproduction remains same-host",
+    "V4 remains historical evidence"
+  ],
+  "sources": {
+    "BUILD_RECEIPT.json": "14c3ddf757a5413b677819c933802b9868bb08a55c5a1c927c331a1041629561",
+    "CLAIM_EVIDENCE_MATRIX.csv": "cf460d16a8127a03bc2515ce03d9a06fc78cdc06777c13c1d57442f732ae9820",
+    "FLAW_REGISTER.md": "f51ac6cd8fc14ac34a352fd8f4a604e3916707eb3bece571b4f8716a36633aa4",
+    "arxiv.sty": "94100720b0deccc57fb5d48e0ebf7af14064a496132a721f0ded95c0890eb889",
+    "main.tex": "2d4b8a036352406e10ac93b2e6cd05772388401df89c41f2dae48bb217df34f0",
+    "references.bib": "1e5fc7daf317687b918c4088fe1bf9325d4d0ed73d62c89f6b6ad595ce1b3798"
+  },
+  "status": "PASS_FINAL_PAPER_VERIFICATION",
+  "visual_review": "PASS_10_RENDERED_PAGES_2026-10-20"
+}
