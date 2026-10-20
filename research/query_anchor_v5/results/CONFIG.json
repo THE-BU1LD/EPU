@@ -1,0 +1,64 @@
+{
+  "alpha": 0.6,
+  "anchor_lambda": 0.1,
+  "beta": 6.0,
+  "evidence_role": "EXPLORATORY_SUCCESSOR_INFORMED_BY_V1_V4",
+  "families": [
+    "unimodal",
+    "multimodal",
+    "distractor"
+  ],
+  "frozen_before_execution_utc": "2026-10-20T17:30:00Z",
+  "hypotheses": [
+    {
+      "family": "multimodal",
+      "id": "H-V5-REPRESENTATION",
+      "left": "direct_multi",
+      "metric": "mean_accuracy",
+      "minimum_delta": 0.25,
+      "right": "direct_mean"
+    },
+    {
+      "family": "distractor",
+      "id": "H-V5-ANCHOR-STABILITY",
+      "left": "original_mean",
+      "metric": "mean_displacement",
+      "minimum_delta": 0.1,
+      "right": "anchor_mean"
+    },
+    {
+      "family": "distractor",
+      "id": "H-V5-RECURRENT-UTILITY",
+      "left": "anchor_topk",
+      "metric": "mean_accuracy",
+      "minimum_delta": 0.01,
+      "right": "direct_multi"
+    },
+    {
+      "family": "distractor",
+      "id": "H-V5-FULL-BANK",
+      "left": "knn",
+      "metric": "mean_accuracy",
+      "minimum_delta": 0.05,
+      "right": "direct_multi"
+    }
+  ],
+  "knn_k": 3,
+  "prototypes_per_class": 2,
+  "seeds": [
+    101,
+    211,
+    307,
+    401,
+    503,
+    601,
+    701,
+    809
+  ],
+  "spread": 0.28,
+  "steps": 8,
+  "test_per_class": 72,
+  "top_k": 2,
+  "train_per_class": 48,
+  "version": "EPU-SYNTHETIC-PHASE-V5"
+}
