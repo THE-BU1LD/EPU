@@ -1,0 +1,6 @@
+claim_id,claim,evidence,status
+C1,The V5 recurrence implementation uses lambda=1 for the original rule and lambda=0.1 for anchoring.,epu_research_system/v5/model.py; tests/test_v5.py,ENGINEERING_VERIFIED
+C2,Multi-prototype representation removes the constructed multimodal mean bottleneck.,runs/epu-synthetic-phase-v5/HYPOTHESES.json:H-V5-REPRESENTATION,EXPLORATORY_SYNTHETIC_PASS
+C3,Anchoring reduces trajectory displacement on the distractor family.,runs/epu-synthetic-phase-v5/HYPOTHESES.json:H-V5-ANCHOR-STABILITY,EXPLORATORY_SYNTHETIC_PASS
+C4,Anchored recurrence improves accuracy over its direct same-bank control by at least one point.,runs/epu-synthetic-phase-v5/HYPOTHESES.json:H-V5-RECURRENT-UTILITY,EXPLORATORY_SYNTHETIC_FAIL
+C5,V5 establishes handwritten-digit efficacy or population generalization.,No supporting artifact,UNSUPPORTED
