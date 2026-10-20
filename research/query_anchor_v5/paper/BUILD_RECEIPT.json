@@ -1,0 +1,15 @@
+{
+  "inputs": {
+    "aggregate": "ff3de350ad4db59f1ef6f74d41d6fa121158f5ba912402abc50ce20b37cd4fc4",
+    "audit": "19cdcc1e746d3ab97acd33d3fa61377051dfc4ea355dce8dc2551f6ece632430",
+    "hypotheses": "cff29463a96aaf64114bd3ba9c5370561cbbc9c108cb9de0ffab8edcf9487e20",
+    "manifest": "792ec09e196938220251b0ac477610281d4eee866c7dba2c7a0439a51d767270"
+  },
+  "outputs": {
+    "CLAIM_EVIDENCE_MATRIX.csv": "cf460d16a8127a03bc2515ce03d9a06fc78cdc06777c13c1d57442f732ae9820",
+    "generated/v5_accuracy.pdf": "f257618a9ca720f2d693b495f161e949a1583b2965d0b214502537e99b080b6e",
+    "generated/v5_hypotheses.tex": "9c1a44748642a0cd6b22f6e6966624b1a727eff72aa3035badc9e35c4023aefa",
+    "generated/v5_results.tex": "9b51224edeb3c9ab55a11223e6a48b5d2a1f585030f8a6a0a68ba100e403b7b7"
+  },
+  "status": "PASS_PAPER_ASSET_BUILD"
+}
