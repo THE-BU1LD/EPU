@@ -1,0 +1,12 @@
+{
+  "execution_state": "PREPARED_NOT_EXECUTED",
+  "files": [
+    "PROTOCOL.json",
+    "README.md",
+    "study.py"
+  ],
+  "notebook": "epu_e6_realdata_gpu.ipynb",
+  "payload_sha256": "05b38dc92c2fb2808de27874e7b35b86a11569da40228a545b9e9787f708f31a",
+  "protocol_sha256": "6c90c95b76e47a3378b7c0504c8ef6ddaf4968c710021a1545e6d23e68121608",
+  "study_sha256": "05af76c23b8eb714fb8680bacc36b00d6c22187be61f2efaade47184613e59a5"
+}
