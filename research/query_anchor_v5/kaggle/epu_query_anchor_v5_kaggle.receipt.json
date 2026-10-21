@@ -1,0 +1,17 @@
+{
+  "claim_boundary": "synthetic V5 only; E5-R1 digits not opened or evaluated",
+  "embedded_files": [
+    "epu_research_system/__init__.py",
+    "epu_research_system/model.py",
+    "epu_research_system/synthetic.py",
+    "epu_research_system/v5/__init__.py",
+    "epu_research_system/v5/model.py",
+    "epu_research_system/v5/run.py",
+    "epu_research_system/v5/report.py",
+    "epu_research_system/v5/audit.py",
+    "epu_research_system/configs/synthetic_phase_v5.json",
+    "epu_research_system/tests/test_v5.py"
+  ],
+  "embedded_payload_sha256": "8e9431cae78aa58221ba5625604105ea762e4277ce26362e139d8564f0086f2c",
+  "notebook": "epu_research_system/kaggle/epu_query_anchor_v5_kaggle.ipynb"
+}
