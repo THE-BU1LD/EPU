@@ -9,11 +9,22 @@
     "environment": "Pin to original environment",
     "paid_compute": false
   },
+  "engineering_amendment": "Set CUBLAS_WORKSPACE_CONFIG=:4096:8 before importing torch so deterministic CUDA matrix products are admitted; no hypothesis, data, split, model, or decision rule changed.",
   "submission_attempt": {
     "version_name": "E6 R2 corrected frozen real-data",
     "result": "BLOCKED_GPU_SESSION_CAP_AFTER_DETERMINISTIC_RUNTIME_AMENDMENT",
     "active_gpu_sessions": 2,
     "unrelated_sessions_cancelled": false,
+    "scientific_result": false
+  },
+  "cli_submission_attempt": {
+    "tool": "official Kaggle CLI 2.2.4",
+    "command_mode": "kernels push with metadata GPU=true, Internet=false, private=true",
+    "result": "BLOCKED_MAXIMUM_BATCH_GPU_SESSION_COUNT_2",
+    "active_sessions": [
+      "ryangomez010/causal-alpha-v3-gpu-execution-20261021",
+      "ryangomez010/sparking-development-v2-risk-gated-gpu"
+    ],
     "scientific_result": false
   },
   "retry_automation": {
@@ -22,6 +33,5 @@
     "state": "ACTIVE",
     "target": "R2_ONLY"
   },
-  "claim": "Prepared and externally uploaded; not scientifically evaluated until a saved GPU version completes and retained outputs verify.",
-  "engineering_amendment": "Set CUBLAS_WORKSPACE_CONFIG=:4096:8 before importing torch so deterministic CUDA matrix products are admitted; no hypothesis, data, split, model, or decision rule changed."
+  "claim": "Prepared and externally uploaded; not scientifically evaluated until a saved GPU version completes and retained outputs verify."
 }
