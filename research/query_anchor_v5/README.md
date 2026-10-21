@@ -35,3 +35,19 @@ python3 -B -m research.query_anchor_v5.run \
 
 The full evidence archive includes the raw JSONL, all 24 per-seed checkpoints,
 aggregates, reports, and the deterministic replay audit.
+
+## Hosted real-data successors
+
+`e6_gpu_r2/` freezes the corrected exploratory Optical Digits GPU study. Its
+Kaggle run remains blocked by the account's two-session batch GPU cap and has no
+scientific result yet.
+
+`e7_gpu_r1/` freezes the writer-disjoint confirmation successor using the
+official UCI Optical Recognition of Handwritten Digits split: 3,823 training
+examples from 30 people and 1,797 test examples from a different 13 people. The
+offline notebook embeds the exact CC BY 4.0 source files, corrected query-anchor
+recurrence, top-k=2 retrieval, exact-feature-group inference, Holm adjustment,
+noninferiority test, and shuffled-label control. The package verifier and
+isolated self-test pass; hosted scientific execution is still pending a free
+Kaggle GPU slot. Because per-row writer identities are unavailable, its
+uncertainty intervals are not adjusted for within-writer clustering.

@@ -1,0 +1,6 @@
+{
+  "kernel_ref": "ryangomez010/epu-e7-writer-disjoint-gpu-r1-20261021",
+  "prepared_utc_date": "2026-10-21",
+  "status": "PREPARED_NOT_SUBMITTED_GPU_CAPACITY_BLOCKED",
+  "submission_policy": "submit only when a free Kaggle batch GPU slot is available; do not cancel unrelated jobs; no paid compute; Internet off"
+}
