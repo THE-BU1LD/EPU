@@ -1,0 +1,41 @@
+{
+  "version": "EPU-REALDATA-E6-GPU-R1",
+  "audited_utc_date": "2026-10-21",
+  "status": "SUPERSEDED_UNSPENT_BEFORE_ADMITTED_GPU_DATA_RUN",
+  "retained_execution": {
+    "kaggle_version": 1,
+    "state": "FAILED_CLOSED",
+    "reason": "BLOCKED_NO_ADMITTED_GPU: CUDA unavailable",
+    "data_accessed": false,
+    "scientific_result": false
+  },
+  "blocking_defects": [
+    {
+      "id": "E6-R1-ANCHOR-OMITTED",
+      "severity": "BLOCKING",
+      "evidence": "prototype_predict updated state as alpha*state + (1-alpha)*lambda*retrieved and omitted (1-lambda)*initial.",
+      "consequence": "anchor_topk did not implement the frozen V5 query-anchored recurrence."
+    },
+    {
+      "id": "E6-R1-TOPK-NOT_APPLIED",
+      "severity": "BLOCKING",
+      "evidence": "prototype_predict applied softmax over every prototype and never selected top-k entries.",
+      "consequence": "original_topk and anchor_topk were mislabeled full-bank recurrence methods."
+    },
+    {
+      "id": "E6-R1-PSEUDOREPLICATION",
+      "severity": "BLOCKING_FOR_INFERENCE",
+      "evidence": "repeat split seeds over the same fixed dataset were treated as inferential units.",
+      "consequence": "uncertainty would quantify split variability while overstating independent sample evidence."
+    }
+  ],
+  "successor": "EPU-REALDATA-E6-GPU-R2",
+  "successor_repairs": [
+    "Exact V5 anchored recurrence restored.",
+    "Deterministic top-k=2 retrieval implemented.",
+    "Inference moved to exact-feature groups after within-group repeated out-of-fold aggregation.",
+    "Noninferiority permutation test is evaluated against the declared -0.01 margin and included in Holm correction.",
+    "Deterministic exact-source notebook packaging."
+  ],
+  "claim": "R1 is design-failure evidence only and must not be used for scientific estimates."
+}
