@@ -2,7 +2,7 @@
   "protocol_version": "EPU-REALDATA-E6-GPU-R2",
   "observed_utc": "2026-10-21T12:42:00Z",
   "kaggle_notebook": "https://www.kaggle.com/code/ryangomez010/epu-e6-real-data-gpu-r2-corrected-20261021",
-  "notebook_payload_sha256": "203d1d233d40a18de5e307139bb891f29db066226b83f42e2f18355261db6bc7",
+  "notebook_payload_sha256": "4be88ea4a13ac1581edb3e03bfdd8ecc273b40e3f9cf23ba85b53198abf05526",
   "settings_verified": {
     "accelerator": "GPU T4 x2",
     "internet": false,
@@ -11,7 +11,7 @@
   },
   "submission_attempt": {
     "version_name": "E6 R2 corrected frozen real-data",
-    "result": "BLOCKED_GPU_SESSION_CAP",
+    "result": "BLOCKED_GPU_SESSION_CAP_AFTER_DETERMINISTIC_RUNTIME_AMENDMENT",
     "active_gpu_sessions": 2,
     "unrelated_sessions_cancelled": false,
     "scientific_result": false
@@ -22,5 +22,6 @@
     "state": "ACTIVE",
     "target": "R2_ONLY"
   },
-  "claim": "Prepared and externally uploaded; not scientifically evaluated until a saved GPU version completes and retained outputs verify."
+  "claim": "Prepared and externally uploaded; not scientifically evaluated until a saved GPU version completes and retained outputs verify.",
+  "engineering_amendment": "Set CUBLAS_WORKSPACE_CONFIG=:4096:8 before importing torch so deterministic CUDA matrix products are admitted; no hypothesis, data, split, model, or decision rule changed."
 }
