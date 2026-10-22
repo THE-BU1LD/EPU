@@ -1,0 +1,120 @@
+{
+  "aggregate_accuracy": {
+    "0.0": {
+      "anchor_topk": 0.5243461324429605,
+      "direct_multi": 0.5243461324429605,
+      "knn3": 0.9859766277128548,
+      "logreg": 0.9684195882025598,
+      "original_topk": 0.5243461324429605
+    },
+    "0.15": {
+      "anchor_topk": 0.5069838619922092,
+      "direct_multi": 0.5069838619922092,
+      "knn3": 0.9804396215915414,
+      "logreg": 0.6600445186421814,
+      "original_topk": 0.5069838619922092
+    },
+    "0.3": {
+      "anchor_topk": 0.4642737896494157,
+      "direct_multi": 0.4642737896494157,
+      "knn3": 0.944268224819143,
+      "logreg": 0.3563717306622148,
+      "original_topk": 0.4642737896494157
+    }
+  },
+  "archive_sha256": "99599f9ed533706a38794c46c7b90dd1bd362784125e881599e1307569ce9942",
+  "checks": [
+    "manifest file hashes",
+    "archive-directory byte equality",
+    "downloaded-local source identity",
+    "GPU admission",
+    "dataset digest",
+    "raw uniqueness and completeness",
+    "fold metric replay",
+    "group effects",
+    "bootstrap intervals",
+    "permutation p-values",
+    "Holm adjustment",
+    "hypothesis decisions",
+    "negative-control retained arithmetic",
+    "log completion"
+  ],
+  "claim_boundary": "Exploratory real-data development evidence. The dataset has no writer identifiers, so this is not writer-disjoint confirmation, independent reproduction, SOTA evidence, or unrestricted efficacy evidence.",
+  "failures": [
+    "Shuffled-label control does not reproduce exactly on CPU; GPU and CPU both pass the frozen threshold. Exact independent GPU reproduction remains required."
+  ],
+  "fold_metric_rows": 1500,
+  "hardware": {
+    "benchmark": {
+      "checksum": -49.440372467041016,
+      "elapsed_seconds": 0.17824860199999648,
+      "estimated_tflops": 0.7710520695809032
+    },
+    "cuda": "12.8",
+    "device": "cuda:0",
+    "name": "Tesla T4",
+    "torch": "2.11.0+cu128",
+    "total_memory_bytes": 15636037632
+  },
+  "kaggle_url": "https://www.kaggle.com/code/ryangomez010/epu-e6-real-data-gpu-r2-corrected-20261021",
+  "manifest_sha256": "a44abac9586d845b597afe1e696a1f86b5ed65c498a7bbdff66d3f8a1dd51d06",
+  "negative_control": {
+    "cpu_mean_accuracy": 0.10055555555555558,
+    "cpu_replay_exact": false,
+    "cpu_status": "PASS",
+    "gpu_mean_accuracy": 0.11194444444444443,
+    "gpu_status": "PASS",
+    "maximum_absolute_accuracy_difference": 0.15555555555555556,
+    "threshold": 0.2
+  },
+  "outcomes": {
+    "H-E6-NONINFERIOR-LOGREG": {
+      "bootstrap_95": [
+        -0.17956779818215546,
+        -0.14703139491745504
+      ],
+      "effect": -0.16307735114079022,
+      "holm_p": 1.0,
+      "raw_permutation_p": 1.0,
+      "status": "FAIL"
+    },
+    "H-E6-ROBUSTNESS": {
+      "bootstrap_95": [
+        0.0,
+        0.0
+      ],
+      "effect": 0.0,
+      "holm_p": 1.0,
+      "raw_permutation_p": 1.0,
+      "status": "FAIL"
+    },
+    "H-E6-STABILITY": {
+      "bootstrap_95": [
+        0.6536281891482328,
+        0.6600025804674975
+      ],
+      "effect": 0.6567944938893377,
+      "holm_p": null,
+      "raw_permutation_p": null,
+      "status": "PASS"
+    },
+    "H-E6-UTILITY": {
+      "bootstrap_95": [
+        0.0,
+        0.0
+      ],
+      "effect": 0.0,
+      "holm_p": 1.0,
+      "raw_permutation_p": 1.0,
+      "status": "FAIL"
+    }
+  },
+  "raw_records": 107820,
+  "raw_sha256": "8cddc9d770750085e9bf4257dd4b23146277d02e2d620cf94ec912e1d8cd6dba",
+  "source": {
+    "PROTOCOL.json": "c9639db017ba87d2524096755590bf630e7826c2b7a327b5d1d9f5ceed4eef6a",
+    "study.py": "0557b46e34f61572e0e08bdce5da1b4a997b4aa13cf1792841f1e596fcc4a54c"
+  },
+  "status": "VERIFIED_E6_R2_RETAINED_EVIDENCE_WITH_CROSS_RUNTIME_CONTROL_MISMATCH",
+  "version": "EPU-REALDATA-E6-GPU-R2"
+}

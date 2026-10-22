@@ -1,0 +1,20 @@
+{
+  "cuda_visible_devices": null,
+  "hardware": {
+    "benchmark": {
+      "checksum": -49.440372467041016,
+      "elapsed_seconds": 0.17824860199999648,
+      "estimated_tflops": 0.7710520695809032
+    },
+    "cuda": "12.8",
+    "device": "cuda:0",
+    "name": "Tesla T4",
+    "torch": "2.11.0+cu128",
+    "total_memory_bytes": 15636037632
+  },
+  "numpy": "2.1.3",
+  "platform": "Linux-6.18.48+-x86_64-with-glibc2.39",
+  "python": "3.13.15",
+  "sklearn": "1.6.1",
+  "torch": "2.11.0+cu128"
+}

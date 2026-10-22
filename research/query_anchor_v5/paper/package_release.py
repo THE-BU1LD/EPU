@@ -9,9 +9,12 @@ import tarfile
 
 
 PAPER = Path(__file__).resolve().parent
-ROOT = PAPER.parents[1]
+ROOT = PAPER.parents[1] if PAPER.parent.name == "epu_research_system" else PAPER.parent
 OUTPUT = ROOT / "output"
-RUN = ROOT / "runs" / "epu-synthetic-phase-v5"
+RUN = ROOT / "runs" / "epu-synthetic-phase-v5" if PAPER.parent.name == "epu_research_system" else ROOT / "results"
+STUDIES = ROOT / "epu_research_system" if PAPER.parent.name == "epu_research_system" else ROOT
+E6 = STUDIES / "e6_gpu_r2"
+E7 = STUDIES / "e7_gpu_r1"
 
 
 def digest(path):
@@ -38,6 +41,7 @@ def package():
         for relative in (
             "main.tex", "references.bib", "arxiv.sty", "generated/v5_results.tex",
             "generated/v5_hypotheses.tex", "generated/v5_accuracy.pdf",
+            "generated/real_hypotheses.tex", "generated/real_accuracy.tex",
             "CLAIM_EVIDENCE_MATRIX.csv", "FLAW_REGISTER.md", "BUILD_RECEIPT.json",
             "PAPER_VERIFICATION.json", "README.md",
         ):
@@ -49,13 +53,20 @@ def package():
         archive.add(ROOT / "epu_research_system" / "synthetic.py", arcname="epu_research_system/synthetic.py")
         archive.add(ROOT / "epu_research_system" / "configs" / "synthetic_phase_v5.json", arcname="epu_research_system/configs/synthetic_phase_v5.json")
         archive.add(ROOT / "epu_research_system" / "tests" / "test_v5.py", arcname="epu_research_system/tests/test_v5.py")
+        for study_root, prefix in ((E6, "epu_research_system/e6_gpu_r2"), (E7, "epu_research_system/e7_gpu_r1")):
+            for relative in (
+                "PROTOCOL.json", "study.py", "verify_package.py", "verify_results.py",
+                "KAGGLE_SUBMISSION_STATUS_20261021.json", "RETAINED_EVIDENCE_VERIFICATION.json",
+            ):
+                archive.add(study_root / relative, arcname=f"{prefix}/{relative}")
+            add_tree(archive, study_root / "results" / "kaggle-v1", f"{prefix}/results/kaggle-v1")
     artifacts = (pdf, arxiv, evidence)
     manifest = {
         "status": "PASS_RELEASE_PACKAGING",
         "artifacts": {str(path.relative_to(ROOT)): {"sha256": digest(path), "bytes": path.stat().st_size} for path in artifacts},
         "paper_verification_sha256": digest(PAPER / "PAPER_VERIFICATION.json"),
-        "scientific_disposition": "MIXED_MECHANISTIC_NEGATIVE_UTILITY_EXPLORATORY_SYNTHETIC",
-        "real_data_status": "BLOCKED_RESOURCE_NOT_EVALUATED",
+        "scientific_disposition": "NEGATIVE_CLASSIFICATION_UTILITY_WITH_POSITIVE_DISPLACEMENT_EFFECT",
+        "real_data_status": "E6_EXPLORATORY_AND_E7_WRITER_INDEPENDENT_VERIFIED",
     }
     (OUTPUT / "RELEASE_MANIFEST.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
     return manifest

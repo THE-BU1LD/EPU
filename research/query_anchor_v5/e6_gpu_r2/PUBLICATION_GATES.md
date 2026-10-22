@@ -6,17 +6,16 @@ evidence. A passing model metric cannot waive a failed or missing gate.
 | Gate | Current state | Acceptance evidence |
 |---|---|---|
 | R2 source and protocol identity | PASS | `verify_package.py` returns `PASS_E6_R2_PACKAGE`; receipt hashes match the notebook payload. |
-| Private hosted GPU submission | BLOCKED | Kaggle accepts a saved GPU version for `ryangomez010/epu-e6-real-data-gpu-r2-corrected-20261021`; Internet remains off and no paid compute is used. |
-| Complete execution | PENDING | Kaggle reports `COMPLETE`; `MANIFEST.json` reports the frozen version, 107,820 raw prediction records, and no failure receipt. |
-| Artifact integrity | PENDING | Downloaded files match every manifest hash; embedded source hashes match the pre-run receipt. |
-| Statistical audit | PENDING | Exact-feature-group effects, 10,000-draw bootstrap intervals, 100,000 sign permutations, and Holm values replay from raw records. |
-| Negative control | PENDING | All 20 shuffled-label runs are retained and their mean accuracy is at most 0.20. |
-| Honest outcome report | PENDING | Every pre-specified hypothesis is reported as PASS or FAIL, including null and adverse results. |
-| Writer-disjoint confirmation | BLOCKED BY DATASET | A separately frozen successor uses a provenance-reviewed dataset with writer identities and a justified writer-level experimental unit. |
+| Private hosted GPU submission | PASS | Kaggle Version 1 is retained at `ryangomez010/epu-e6-real-data-gpu-r2-corrected-20261021`; Internet remained off and free Tesla T4 compute was used. |
+| Complete execution | PASS | Kaggle reports `COMPLETE`; the manifest retains 107,820 raw records and 1,500 fold-metric rows. |
+| Artifact integrity | PASS | `verify_results.py` matches the archive, output directory, manifest hashes, and submitted source identities. |
+| Statistical audit | PASS | Exact-feature-group effects, 10,000-draw intervals, 100,000 sign permutations, Holm values, and decisions replay from raw records. |
+| Negative control | PASS WITH PORTABILITY FAILURE | GPU mean 0.111944 and CPU mean 0.100556 both pass the 0.20 ceiling, but individual values do not reproduce exactly. |
+| Honest outcome report | PASS | Utility, robustness, and noninferiority FAIL; displacement stability PASS. |
+| Writer-disjoint confirmation | SATISFIED BY E7 SUCCESSOR | E7 uses the official writer-independent UCI partition; per-row writer identities remain unavailable. |
 | Independent reproduction | PENDING | A second operator/runtime reproduces the bound source, protocol, dataset identity, and result artifacts. |
-| Manuscript claim audit | PENDING | Each quantitative claim maps to a verified artifact; exploratory E6 evidence is not described as writer-disjoint, confirmatory, independent, or SOTA evidence. |
+| Manuscript claim audit | PASS | The final claim matrix maps E6 quantitative claims to the retained verification receipt and preserves all failed hypotheses. |
 
-The current Optical Digits run can satisfy the engineering, hosted-execution,
-artifact, statistical, control, and honest-reporting gates. It cannot satisfy
-writer-disjoint confirmation because the packaged dataset does not expose
-writer identities.
+The only open E6-level publication gate is independent GPU reproduction. E6 is
+exploratory real-data evidence; E7 separately supplies writer-independent
+partition confirmation while retaining its writer-clustering limitation.

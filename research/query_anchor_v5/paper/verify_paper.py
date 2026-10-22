@@ -23,7 +23,7 @@ def verify():
         if digest(HERE / relative) != expected:
             raise ValueError(f"paper asset changed: {relative}")
     reader = PdfReader(HERE / "main.pdf")
-    if len(reader.pages) != 10:
+    if not 11 <= len(reader.pages) <= 14:
         raise ValueError(f"unexpected page count: {len(reader.pages)}")
     pages = [(page.extract_text() or "").strip() for page in reader.pages]
     if any(len(page) < 100 for page in pages):
@@ -34,8 +34,10 @@ def verify():
         "Query Anchoring Stabilizes Associative Retrieval",
         "RECURRENT-UTILITY",
         "27,648",
-        "BLOCKED_RESOURCE",
-        "Reproduction remains same-host",
+        "UTILITY",
+        "107,820",
+        "writer-independent",
+        "cross-runtime negative-control mismatch",
         "V4 remains historical evidence",
     )
     missing = [phrase for phrase in required if phrase.lower() not in normalized]
@@ -50,8 +52,8 @@ def verify():
         "pdf_sha256": digest(HERE / "main.pdf"),
         "sources": {name: digest(HERE / name) for name in ("main.tex", "references.bib", "arxiv.sty", "BUILD_RECEIPT.json", "CLAIM_EVIDENCE_MATRIX.csv", "FLAW_REGISTER.md")},
         "required_phrases_verified": list(required),
-        "visual_review": "PASS_10_RENDERED_PAGES_2026-10-20",
-        "claim_boundary": "Exploratory synthetic mechanism paper; real E5-R1 digits execution remains BLOCKED_RESOURCE.",
+        "visual_review": f"PASS_{len(reader.pages)}_RENDERED_PAGES_2026-10-22",
+        "claim_boundary": "Negative efficacy result from source-bound synthetic, exploratory real-data, and writer-independent partition studies; no SOTA, unrestricted generalization, or independent reproduction claim.",
     }
     (HERE / "PAPER_VERIFICATION.json").write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
     return result

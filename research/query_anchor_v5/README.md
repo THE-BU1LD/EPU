@@ -18,8 +18,11 @@ and E5-R1 real-data protocols.
   same-bank control both score 0.968, while recurrence uses 36 versus 4 score
   evaluations.
 
-This is exploratory synthetic evidence. The real EPU-QA1 digit run remains
-`BLOCKED_RESOURCE` and `NOT_EVALUATED`; there is no confirmatory or independent
+Two frozen real-data GPU successors are complete. E6 R2 provides exploratory
+grouped cross-validation evidence; E7 uses the official writer-independent UCI
+partition. Both fail utility, robustness, and logistic-regression
+noninferiority while passing only the displacement-reduction hypothesis. The
+result is a verified negative efficacy finding, without an independent
 reproduction claim.
 
 ## Reproduce
@@ -27,27 +30,25 @@ reproduction claim.
 From repository root:
 
 ```sh
-python3 -B -m unittest discover -s research/query_anchor_v5/tests -v
-python3 -B -m research.query_anchor_v5.run \
-  --config research/query_anchor_v5/configs/synthetic_phase_v5.json \
+PYTHONPATH=research/query_anchor_v5 python3 -B -m unittest discover \
+  -s research/query_anchor_v5/epu_research_system/tests -v
+PYTHONPATH=research/query_anchor_v5 python3 -B -m epu_research_system.v5.run \
+  --config research/query_anchor_v5/epu_research_system/configs/synthetic_phase_v5.json \
   --output /tmp/epu-v5-replay
+python3 research/query_anchor_v5/e6_gpu_r2/verify_package.py
+python3 research/query_anchor_v5/e6_gpu_r2/verify_results.py
+python3 research/query_anchor_v5/e7_gpu_r1/verify_package.py
+python3 research/query_anchor_v5/e7_gpu_r1/verify_results.py
+cd research/query_anchor_v5/paper
+python3 build_assets.py
+tectonic main.tex
+python3 verify_paper.py
+python3 package_release.py
 ```
 
-The full evidence archive includes the raw JSONL, all 24 per-seed checkpoints,
-aggregates, reports, and the deterministic replay audit.
+The full evidence archive includes V5 raw records and checkpoints plus the E6
+and E7 notebooks, protocols, raw GPU outputs, manifests, logs, result verifiers,
+and retained-evidence receipts.
 
-## Hosted real-data successors
-
-`e6_gpu_r2/` freezes the corrected exploratory Optical Digits GPU study. Its
-Kaggle run remains blocked by the account's two-session batch GPU cap and has no
-scientific result yet.
-
-`e7_gpu_r1/` freezes the writer-disjoint confirmation successor using the
-official UCI Optical Recognition of Handwritten Digits split: 3,823 training
-examples from 30 people and 1,797 test examples from a different 13 people. The
-offline notebook embeds the exact CC BY 4.0 source files, corrected query-anchor
-recurrence, top-k=2 retrieval, exact-feature-group inference, Holm adjustment,
-noninferiority test, and shuffled-label control. The package verifier and
-isolated self-test pass; hosted scientific execution is still pending a free
-Kaggle GPU slot. Because per-row writer identities are unavailable, its
-uncertainty intervals are not adjusted for within-writer clustering.
+The verified PDF, arXiv source bundle, full evidence archive, and release
+manifest are under `output/`.

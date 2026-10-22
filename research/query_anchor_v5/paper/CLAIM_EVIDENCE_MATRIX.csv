@@ -4,3 +4,8 @@ C2,Multi-prototype representation removes the constructed multimodal mean bottle
 C3,Anchoring reduces trajectory displacement on the distractor family.,runs/epu-synthetic-phase-v5/HYPOTHESES.json:H-V5-ANCHOR-STABILITY,EXPLORATORY_SYNTHETIC_PASS
 C4,Anchored recurrence improves accuracy over its direct same-bank control by at least one point.,runs/epu-synthetic-phase-v5/HYPOTHESES.json:H-V5-RECURRENT-UTILITY,EXPLORATORY_SYNTHETIC_FAIL
 C5,V5 establishes handwritten-digit efficacy or population generalization.,No supporting artifact,UNSUPPORTED
+C6,E6 R2 improves classification over its same-bank direct control.,epu_research_system/e6_gpu_r2/RETAINED_EVIDENCE_VERIFICATION.json:H-E6-UTILITY,REAL_DATA_FAIL
+C7,E7 improves classification over its same-bank direct control on the official writer-independent partition.,epu_research_system/e7_gpu_r1/RETAINED_EVIDENCE_VERIFICATION.json:H-E7-UTILITY,WRITER_DISJOINT_FAIL
+C8,Anchoring reduces displacement in E6 R2 and E7.,E6/E7 retained verification receipts:STABILITY,REAL_DATA_PASS
+C9,E6 R2 and E7 are noninferior to logistic regression at the declared -0.01 margin.,E6/E7 retained verification receipts:NONINFERIOR-LOGREG,REAL_DATA_FAIL
+C10,The hosted evidence is independently reproduced on a second GPU environment.,No supporting artifact,UNSUPPORTED

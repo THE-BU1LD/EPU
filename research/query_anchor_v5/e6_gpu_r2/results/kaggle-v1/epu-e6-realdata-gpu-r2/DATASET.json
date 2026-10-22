@@ -1,0 +1,19 @@
+{
+  "canonical_array_sha256": "f6d9e39f37dc45d327f6db33428ee58970ccceabb2535a5c179de35886b70443",
+  "classes": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "duplicate_groups": 1797,
+  "features": 64,
+  "rows": 1797,
+  "sklearn": "1.6.1"
+}

@@ -1,0 +1,23 @@
+{
+  "claim_boundary": "Writer-disjoint partition confirmation on the official UCI split. It is not writer-cluster-adjusted inference, independent reproduction, SOTA evidence, or unrestricted efficacy evidence.",
+  "files": {
+    "DATASET.json": "2e77ef8d30e02eb28331d35e71ffb1b6856dca5f68b1f0156c38cdb4eb9199b6",
+    "ENVIRONMENT.json": "d78cc69717229916e7b5a35e3c80e8faa9f97461453f33525884c50fc03a47e5",
+    "FOLD_METRICS.csv": "a2ade68038da3c146e5037c7726397443858dde8c854f63c61df5665fc45ede3",
+    "HYPOTHESES.json": "f4181639d2b7c54ee4adcde05d6af7dc9d6f57e026987a15e62d3abf75ac8edf",
+    "PROTOCOL.json": "716892ebed92b4abd35461bdd4ce14e7dbb88f192cfc66dd31cbcaa64b494ff5",
+    "RAW.jsonl.gz": "39905157c4eeb03cb6a5cd55951eb29bf046d32ca937e34102e19f58c32f108a",
+    "RESULTS.md": "481c7f71f025f71ad7f5e60228170113658705fa3f4f302b3f9fb2f65a9aa6f2",
+    "SELF_TEST.json": "f8385f012b4fd755a47d690ecda1c574fabb7098af3ba30ecec36c9dd4b6ed16"
+  },
+  "gpu_prediction_batches": 260,
+  "inference_group_count": 1797,
+  "inference_unit": "exact-feature group in fixed test partition",
+  "records": 107820,
+  "source": {
+    "PROTOCOL.json": "436a526420998a23233657ee9ac5d156d24a4484e4215e983e1380ca8b024a1c",
+    "study.py": "5079447fe8602e441c55c6b62b3d6b0194862b352055233083ec2a8298bbd89f"
+  },
+  "status": "COMPLETE",
+  "version": "EPU-REALDATA-E7-WRITER-DISJOINT-GPU-R1"
+}

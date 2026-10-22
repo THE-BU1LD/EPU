@@ -5,16 +5,17 @@
 \usepackage{amsmath,amssymb,booktabs,graphicx,microtype,array,longtable}
 \usepackage[colorlinks=true,allcolors=blue]{hyperref}
 \usepackage{url}
+\setlength{\emergencystretch}{2em}
 
 \title{Query Anchoring Stabilizes Associative Retrieval\\Without Improving Classification:\\A Source-Bound Failure Analysis}
 \author{Prepared for Ryan Gomez}
-\date{20 October 2026}
+\date{22 October 2026}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Iterative associative retrieval can converge while degrading, preserving, or failing to improve a classifier. We study a narrow query-anchoring intervention motivated by a retained failure of an experimental EPU digit classifier. The intervention mixes the original query into every recurrent update, yielding a query-conditioned fixed point and a tractable displacement bound. We first identify a defect in a prior synthetic implementation: its purported unanchored recurrence multiplied retrieval by $0.1$ instead of using the required weight $1.0$. We preserve that evidence and introduce a corrected exploratory successor, V5. V5 separates mean, multi-prototype, and full-bank representations; compares direct and recurrent inference on identical banks; unit-normalizes the geometry; records 27,648 example-method outcomes; binds source and checkpoint hashes; and deterministically replays the complete result. Across known-mechanism simulations, multi-prototype representation resolves a constructed multimodal mean bottleneck (accuracy $1.000$ versus $0.497$), and anchoring reduces mean distractor displacement from $0.783$ to $0.077$. However, anchored top-$k$ recurrence gives exactly the same distractor accuracy as its direct same-bank control ($0.968$), failing the pre-specified one-point utility screen. The result supports a restricted conclusion: query anchoring controls movement, while the tested recurrence adds no predictive value beyond the representation on these simulations. The real EPU-QA1 digit study remains unexecuted because its frozen memory/pageout admission guard failed before data access. Accordingly, this paper is a complete negative-mechanism report, not a digit-efficacy, novelty, or submission-ready claim.
+Iterative associative retrieval can converge while degrading, preserving, or failing to improve a classifier. We study a narrow query-anchoring intervention motivated by a retained failure of an experimental EPU digit classifier. The intervention mixes the original query into every recurrent update, yielding a query-conditioned fixed point and a tractable displacement bound. A corrected synthetic successor separates representation from recurrence and records 27,648 example-method outcomes. Multi-prototype representation resolves a constructed multimodal mean bottleneck (accuracy $1.000$ versus $0.497$), and anchoring reduces mean distractor displacement from $0.783$ to $0.077$, but anchored recurrence exactly matches its direct same-bank control ($0.968$). We then run two frozen real-data GPU studies. E6 R2 evaluates grouped cross-validation on 1,797 Optical Digits examples; E7 uses the official writer-independent split with 3,823 training examples from 30 people and 1,797 test examples from a different 13 people. In both studies, anchored recurrence and its direct multi-prototype control make identical predictions at every declared noise level. Utility and robustness effects are exactly zero, noninferiority to logistic regression fails, and only the displacement-reduction hypothesis passes. All retained manifests, source identities, 215,640 raw records, bootstrap intervals, permutation tests, Holm adjustments, and decisions were independently replayed. Query anchoring is therefore a reliable movement constraint in these setups, but the tested recurrence adds no predictive value beyond its representation. This is a source-bound negative efficacy result, not a state-of-the-art or unrestricted generalization claim.
 \end{abstract}
 
 \section{Introduction}
@@ -29,8 +30,8 @@ Our contributions are:
   \item a complete contract for the query-anchored recurrence and its direct controls;
   \item discovery and repair of a prior implementation defect that invalidated the unanchored synthetic comparison;
   \item a factorial synthetic matrix that separates representation, recurrence, sparsity, and full-bank effects;
-  \item immutable, source-bound records with deterministic replay and explicit negative outcomes; and
-  \item a claim boundary that leaves real-data efficacy and population generalization unresolved.
+  \item immutable, source-bound synthetic and hosted-GPU records with deterministic metric replay and explicit negative outcomes; and
+  \item a writer-independent real-data confirmation showing that lower displacement does not improve classification in the tested design.
 \end{enumerate}
 
 \section{Related work and novelty boundary}
@@ -124,30 +125,43 @@ The central utility screen failed. Anchored top-$k$ recurrence and its direct mu
 
 The result is scientifically useful because it discriminates mechanisms. Representation changes solve the deliberately constructed multimodal failure. Anchoring strongly controls trajectory displacement. The tested recurrence adds no classification value beyond its representation.
 
-\section{Real-data protocol and blocked execution}
-The frozen EPU-QA1 development protocol targets the scikit-learn 1,797-row subset of the UCI Optical Recognition of Handwritten Digits data. The full UCI resource contains 5,620 64-feature instances and documents disjoint writers in its official training and test sets \cite{uci1998}. The locally installed subset does not expose writer identifiers, so it cannot support writer-level independence.
+\section{Real-data GPU studies}
+\subsection{Frozen protocols}
+E6 R2 and E7 are separately versioned successors to the protected EPU-QA1 and E5-R1 studies; they do not alter or overwrite those historical outcomes. E6 R2 uses the scikit-learn 1,797-row Optical Digits subset, 20 repeats of five-fold grouped stratification over exact-feature groups, and three fixed noise levels. E7 uses the official UCI partition: 3,823 training examples contributed by 30 people and 1,797 test examples from a different 13 people \cite{uci1998}. UCI designates that split as a writer-independent quality measure. The files do not expose per-row writer identities, so E7 establishes partition independence but cannot support writer-cluster-adjusted intervals.
 
-The E5-R1 controller requires 31 resource samples over at least 30 seconds with at least 1 GiB free-plus-speculative memory before reserving the sole replacement attempt, plus a 512 MiB runtime floor and stable pageouts. The latest retained attempt was refused before data access. The current host remained below the floor during this work, so the replacement attempt was not spent. Synthetic results cannot replace this missing execution.
+Both studies compare anchored top-$k$ recurrence, original top-$k$ recurrence, direct multi-prototype inference on the identical bank, three-neighbor full-bank voting, and logistic regression. E6 fits inside each training fold; E7 fits only on the official training partition. Both use 20 fixed noise draws at standard deviations $0$, $0.15$, and $0.30$. Inference averages repeated predictions within exact-feature groups, uses 10,000 paired bootstrap draws and 100,000 sign permutations, applies Holm adjustment to the three accuracy hypotheses, tests the declared $-0.01$ noninferiority margin, and includes a shuffled-label negative control. Frozen CUDA admission requires a GPU with at least 8 GiB memory.
+
+\subsection{Hosted execution and results}
+Both private Kaggle Version 1 notebooks completed on a Tesla T4 with CUDA 12.8 and 15,636,037,632 bytes of device memory. Each retained 107,820 raw example-method-noise records. E6 retained 1,500 fold-metric rows; E7 retained 300 fixed-partition metric rows. Independent local verification checked the downloaded archive against the output directory, source and protocol hashes, raw key completeness, recomputed metrics, exact-feature-group effects, bootstrap intervals, permutation $p$ values, Holm adjustments, hypothesis decisions, negative controls, and completion logs.
+
+\input{generated/real_hypotheses.tex}
+\input{generated/real_accuracy.tex}
+
+In E6, anchored recurrence, direct multi-prototype inference, and original recurrence all achieved accuracies $0.524$, $0.507$, and $0.464$ as noise increased. Full-bank three-neighbor voting achieved $0.986$, $0.980$, and $0.944$; logistic regression achieved $0.968$, $0.660$, and $0.356$. The utility and robustness contrasts were exactly zero. The noninferiority effect was $-0.163$ with 95\% CI $[-0.180,-0.147]$, below the frozen margin. Anchoring reduced displacement by $0.657$ with 95\% CI $[0.654,0.660]$.
+
+E7 confirms the same pattern on the official writer-independent split. Anchored recurrence, direct multi-prototype inference, and original recurrence all achieved $0.432$, $0.420$, and $0.377$. Three-neighbor voting achieved $0.978$, $0.970$, and $0.928$; logistic regression achieved $0.950$, $0.686$, and $0.384$. Utility and robustness effects were again exactly zero. The noninferiority effect was $-0.263$ with 95\% CI $[-0.285,-0.242]$. Anchoring reduced displacement by $0.691$ with 95\% CI $[0.687,0.694]$.
+
+Both shuffled-label controls passed the frozen $0.20$ ceiling. E7 reproduced exactly on CPU with mean accuracy $0.0879$. E6's GPU mean was $0.1119$ and its CPU replay mean was $0.1006$; individual control values differed although the PASS decision was unchanged. We retain this portability failure and require an independent GPU reproduction before making a cross-runtime reproducibility claim.
 
 \section{Threats to validity and limitations}
-The synthetic generators encode the mechanisms they test. Their positive representation result is therefore a construction check, not a discovery about natural data. V5 was informed by earlier phases and is exploratory. The seed count is small, and the random streams are not independent people, devices, or acquisition sites. No learned encoder, calibration study, probability model, adversarial perturbation suite, or real OOD domain is evaluated.
+The synthetic generators encode the mechanisms they test. Their positive representation result is therefore a construction check, not a discovery about natural data. V5 was informed by earlier phases and is exploratory. The E6 data do not expose writer identity, and E7 exposes only a writer-independent partition rather than row-level writer labels. Exact-feature grouping prevents duplicate-feature pseudoreplication but cannot replace writer-cluster adjustment. No learned encoder, calibration study, probability model, adversarial perturbation suite, or external acquisition site is evaluated.
 
 The multi-prototype fit uses deterministic spherical $k$-means and thus adds representational capacity. V5 controls this by comparing direct and recurrent inference on the same bank, but it does not equalize storage with the mean bank. Full-bank methods use more memory. Score evaluations are an implementation-independent cost proxy, not a hardware energy measurement.
 
-The proof bounds are conditional and may be loose. Contraction, energy decrease, and small displacement cannot imply classification accuracy. The present work does not establish architecture novelty, state of the art, digit efficacy, population generalization, biological plausibility, or hardware efficiency.
+The proof bounds are conditional and may be loose. Contraction, energy decrease, and small displacement cannot imply classification accuracy. The present work does not establish architecture novelty, state of the art, population-wide digit efficacy, biological plausibility, or hardware efficiency. E6's cross-runtime negative-control mismatch limits byte-level portability, and neither hosted run is an independent reproduction because the same authors prepared and verified both studies.
 
 \section{Reproducibility and evidence integrity}
-The V5 configuration, raw JSONL records, per-seed CSV, per-cell checkpoints, aggregates, hypotheses, report, figure, and audit are retained under a single run directory. The manifest binds the executed Python sources and every checkpoint. The auditor verifies 27,648 unique Cartesian cells, recomputes aggregates and hypothesis outcomes, verifies report hashes, and performs a byte-level deterministic replay of the scientific outputs. The claim-evidence matrix maps each manuscript claim to its artifact and disposition.
+The V5 configuration, raw JSONL records, per-seed CSV, checkpoints, aggregates, hypotheses, report, figure, and audit are retained under a single run directory. Its auditor verifies 27,648 unique Cartesian cells and performs a byte-level deterministic replay. E6 and E7 retain the exact submitted notebooks, protocols, source receipts, Kaggle logs, GPU environment records, compressed raw predictions, fold metrics, hypothesis files, manifests, and evidence archives. Portable verifiers recompute all reported quantities from raw records. The claim-evidence matrix maps each manuscript claim to an artifact and disposition.
 
-Reproduction remains same-host engineering verification. Independent reproduction requires another executor and environment, and has not occurred.
+This is independent metric verification of hosted evidence, not independent scientific reproduction. A second executor and GPU environment remain required.
 
 \section{Discussion}
 The study illustrates a common evaluation error: an intervention can repair a mathematical property without repairing the task. Query anchoring changes the fixed-point equation and reduces drift, but the direct decoder already contains the relevant decision on these geometries. Repeated retrieval then consumes more score evaluations without adding information. When the class mean is insufficient, changing representation matters; recurrence over an insufficient bank does not create the missing modes.
 
-The next defensible real-data study should retain same-bank direct controls, writer-disjoint groups, a predeclared practical effect threshold that includes compute cost, and a new protocol frozen before protected outcomes. If the direct comparator remains equal or stronger, the utility branch should close rather than searching adaptively for a favorable configuration.
+The real-data studies now resolve the originally open question. Same-bank direct controls are exactly equal to recurrence, while much simpler established baselines are substantially stronger over most tested conditions. The recurrent utility branch should therefore close for this frozen architecture rather than search adaptively for a favorable configuration. Any successor must state a new mechanism, use a separately versioned protocol, preserve the failed outcomes, and justify additional compute before inspecting protected results.
 
 \section{Conclusion}
-Query anchoring is an effective movement constraint in the tested synthetic systems, but it does not improve classification over direct inference with the same memory bank. A corrected and fully audited successor therefore yields a mixed mechanistic result and a negative utility result. The evidence supports continued use of direct inference as the default for these synthetic families. EPU-QA1 remains incomplete on real digits because the frozen development run has not passed resource admission, and no confirmatory or independently reproduced result exists.
+Query anchoring is an effective movement constraint in the tested synthetic and real-data systems, but it does not improve classification over direct inference with the same memory bank. The writer-independent E7 study confirms the negative utility result: anchoring changes trajectories while leaving all declared predictions unchanged. The evidence supports direct inference or the stronger conventional baselines for these tasks and closes the efficacy branch for the frozen architecture. Independent GPU reproduction and writer-cluster-adjusted uncertainty remain open reproducibility questions; they do not change the observed zero utility effect.
 
 \bibliographystyle{plain}
 \bibliography{references}
@@ -157,6 +171,6 @@ Query anchoring is an effective movement constraint in the tested synthetic syst
 The local \texttt{arxiv.sty} is a project-specific adaptation of the user's existing local style shim. Only its header text and package date were adapted for this manuscript. The scientific assets are generated only after the V5 adversarial audit passes.
 
 \section{Disposition vocabulary}
-Engineering verification means that code and artifact contracts passed. Exploratory synthetic pass or fail refers only to a V5 check. \texttt{BLOCKED\_RESOURCE} means the guarded real-data attempt refused before opening its payload. None of these states implies confirmation, independent reproduction, submission, or publication.
+Engineering verification means that code and artifact contracts passed. Exploratory synthetic pass or fail refers only to a V5 check. Real-data pass or fail refers to a frozen E6 or E7 decision rule. Writer-independent confirmation describes the official partition, not writer-cluster-adjusted inference. None of these states implies independent reproduction, state-of-the-art performance, submission, or publication.
 
 \end{document}

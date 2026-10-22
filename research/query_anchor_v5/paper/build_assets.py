@@ -11,9 +11,20 @@ from reportlab.lib.pagesizes import landscape, letter
 from reportlab.pdfgen import canvas
 
 
-ROOT = Path(__file__).resolve().parents[2]
 PAPER = Path(__file__).resolve().parent
-RUN = ROOT / "runs" / "epu-synthetic-phase-v5"
+if PAPER.parent.name == "epu_research_system":
+    ROOT = PAPER.parents[1]
+    RUN = ROOT / "runs" / "epu-synthetic-phase-v5"
+    STUDIES = ROOT / "epu_research_system"
+else:
+    ROOT = PAPER.parent
+    RUN = ROOT / "results"
+    STUDIES = ROOT
+E6 = STUDIES / "e6_gpu_r2" / "RETAINED_EVIDENCE_VERIFICATION.json"
+E7 = STUDIES / "e7_gpu_r1" / "RETAINED_EVIDENCE_VERIFICATION.json"
+AUDIT = RUN / "audit" / "ADVERSARIAL_AUDIT.json"
+if not AUDIT.exists():
+    AUDIT = RUN / "ADVERSARIAL_AUDIT.json"
 GENERATED = PAPER / "generated"
 
 
@@ -56,11 +67,17 @@ def build_figure(rows, output):
 
 
 def build():
-    audit = json.loads((RUN / "audit" / "ADVERSARIAL_AUDIT.json").read_text())
+    audit = json.loads(AUDIT.read_text())
     if audit.get("status") != "PASS_V5_ADVERSARIAL_AUDIT":
         raise ValueError("passing V5 audit required")
     aggregate = json.loads((RUN / "AGGREGATE.json").read_text())
     hypotheses = json.loads((RUN / "HYPOTHESES.json").read_text())
+    e6 = json.loads(E6.read_text())
+    e7 = json.loads(E7.read_text())
+    if not e6["status"].startswith("VERIFIED_E6_R2_RETAINED_EVIDENCE"):
+        raise ValueError("verified E6 retained evidence required")
+    if e7["status"] != "PASS_E7_R1_RETAINED_EVIDENCE":
+        raise ValueError("verified E7 retained evidence required")
     GENERATED.mkdir(exist_ok=True)
     results = ["% Generated from the audited V5 aggregate.", "\\begin{table*}[t]", "\\centering", "\\scriptsize", "\\setlength{\\tabcolsep}{3.5pt}",
                "\\caption{V5 exploratory synthetic results. Accuracy, mean query displacement, prediction-change rate, and score evaluations are means across eight simulation seeds.}",
@@ -82,19 +99,71 @@ def build():
     checks += ["\\bottomrule", "\\end{tabular}", "\\end{table}", ""]
     (GENERATED / "v5_hypotheses.tex").write_text("\n".join(checks))
     build_figure(aggregate["rows"], GENERATED / "v5_accuracy.pdf")
+    real = [
+        "% Generated from independently replayed E6 and E7 retained evidence.",
+        "\\begin{table*}[t]", "\\centering", "\\small",
+        "\\caption{Frozen real-data hypothesis outcomes. Accuracy effects compare anchored top-$k$ recurrence with the stated control. Intervals are 95\\% exact-feature-group bootstrap intervals. Accuracy-family $p$ values are Holm adjusted.}",
+        "\\label{tab:real-hypotheses}",
+        "\\resizebox{\\textwidth}{!}{%", "\\begin{tabular}{lllrrrl}", "\\toprule",
+        "Study & Hypothesis & Contrast & Effect & CI lower & CI upper & Status \\\\", "\\midrule",
+    ]
+    labels = {
+        "UTILITY": "anchor - direct multi",
+        "ROBUSTNESS": "anchor - direct multi at noise 0.30",
+        "NONINFERIOR-LOGREG": "anchor - logistic regression",
+        "STABILITY": "original - anchored displacement",
+    }
+    for study, payload in (("E6", e6), ("E7", e7)):
+        for key in (f"H-{study}-UTILITY", f"H-{study}-ROBUSTNESS", f"H-{study}-NONINFERIOR-LOGREG", f"H-{study}-STABILITY"):
+            item = payload["outcomes"][key]
+            suffix = key.removeprefix(f"H-{study}-")
+            lo, hi = item["bootstrap_95"]
+            real.append(
+                f"{study} & {tex_escape(suffix)} & {labels[suffix]} & "
+                f"{item['effect']:.3f} & {lo:.3f} & {hi:.3f} & {item['status']} \\\\")
+        if study == "E6":
+            real.append("\\midrule")
+    real += ["\\bottomrule", "\\end{tabular}}", "\\end{table*}", ""]
+    (GENERATED / "real_hypotheses.tex").write_text("\n".join(real))
+
+    accuracies = [
+        "% Generated from independently replayed E6 and E7 retained evidence.",
+        "\\begin{table}[t]", "\\centering", "\\small",
+        "\\caption{Aggregate accuracy at zero and maximum noise. The anchored and direct multi-prototype values are identical in both studies at every noise level.}",
+        "\\label{tab:real-accuracy}",
+        "\\begin{tabular}{llrr}", "\\toprule",
+        "Study & Method & Noise 0 & Noise 0.30 \\\\", "\\midrule",
+    ]
+    for study, payload in (("E6", e6), ("E7", e7)):
+        for method in ("anchor_topk", "knn3", "logreg"):
+            accuracies.append(
+                f"{study} & {tex_escape(method)} & "
+                f"{payload['aggregate_accuracy']['0.0'][method]:.3f} & "
+                f"{payload['aggregate_accuracy']['0.3'][method]:.3f} \\\\")
+        if study == "E6":
+            accuracies.append("\\midrule")
+    accuracies += ["\\bottomrule", "\\end{tabular}", "\\end{table}", ""]
+    (GENERATED / "real_accuracy.tex").write_text("\n".join(accuracies))
     claims = [
         ["C1", "The V5 recurrence implementation uses lambda=1 for the original rule and lambda=0.1 for anchoring.", "epu_research_system/v5/model.py; tests/test_v5.py", "ENGINEERING_VERIFIED"],
         ["C2", "Multi-prototype representation removes the constructed multimodal mean bottleneck.", "runs/epu-synthetic-phase-v5/HYPOTHESES.json:H-V5-REPRESENTATION", "EXPLORATORY_SYNTHETIC_PASS"],
         ["C3", "Anchoring reduces trajectory displacement on the distractor family.", "runs/epu-synthetic-phase-v5/HYPOTHESES.json:H-V5-ANCHOR-STABILITY", "EXPLORATORY_SYNTHETIC_PASS"],
         ["C4", "Anchored recurrence improves accuracy over its direct same-bank control by at least one point.", "runs/epu-synthetic-phase-v5/HYPOTHESES.json:H-V5-RECURRENT-UTILITY", "EXPLORATORY_SYNTHETIC_FAIL"],
         ["C5", "V5 establishes handwritten-digit efficacy or population generalization.", "No supporting artifact", "UNSUPPORTED"],
+        ["C6", "E6 R2 improves classification over its same-bank direct control.", "epu_research_system/e6_gpu_r2/RETAINED_EVIDENCE_VERIFICATION.json:H-E6-UTILITY", "REAL_DATA_FAIL"],
+        ["C7", "E7 improves classification over its same-bank direct control on the official writer-independent partition.", "epu_research_system/e7_gpu_r1/RETAINED_EVIDENCE_VERIFICATION.json:H-E7-UTILITY", "WRITER_DISJOINT_FAIL"],
+        ["C8", "Anchoring reduces displacement in E6 R2 and E7.", "E6/E7 retained verification receipts:STABILITY", "REAL_DATA_PASS"],
+        ["C9", "E6 R2 and E7 are noninferior to logistic regression at the declared -0.01 margin.", "E6/E7 retained verification receipts:NONINFERIOR-LOGREG", "REAL_DATA_FAIL"],
+        ["C10", "The hosted evidence is independently reproduced on a second GPU environment.", "No supporting artifact", "UNSUPPORTED"],
     ]
     with (PAPER / "CLAIM_EVIDENCE_MATRIX.csv").open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.writer(handle); writer.writerow(["claim_id", "claim", "evidence", "status"]); writer.writerows(claims)
-    outputs = [GENERATED / "v5_results.tex", GENERATED / "v5_hypotheses.tex", GENERATED / "v5_accuracy.pdf", PAPER / "CLAIM_EVIDENCE_MATRIX.csv"]
+        writer = csv.writer(handle, lineterminator="\n"); writer.writerow(["claim_id", "claim", "evidence", "status"]); writer.writerows(claims)
+    outputs = [GENERATED / "v5_results.tex", GENERATED / "v5_hypotheses.tex", GENERATED / "v5_accuracy.pdf",
+               GENERATED / "real_hypotheses.tex", GENERATED / "real_accuracy.tex", PAPER / "CLAIM_EVIDENCE_MATRIX.csv"]
     receipt = {"status": "PASS_PAPER_ASSET_BUILD", "inputs": {
         "manifest": digest(RUN / "MANIFEST.json"), "aggregate": digest(RUN / "AGGREGATE.json"),
-        "hypotheses": digest(RUN / "HYPOTHESES.json"), "audit": digest(RUN / "audit" / "ADVERSARIAL_AUDIT.json")},
+        "hypotheses": digest(RUN / "HYPOTHESES.json"), "audit": digest(AUDIT),
+        "e6_retained_verification": digest(E6), "e7_retained_verification": digest(E7)},
         "outputs": {str(path.relative_to(PAPER)): digest(path) for path in outputs}}
     (PAPER / "BUILD_RECEIPT.json").write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n")
 

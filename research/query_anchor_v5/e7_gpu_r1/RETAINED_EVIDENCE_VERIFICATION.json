@@ -1,0 +1,118 @@
+{
+  "aggregate_accuracy": {
+    "0.0": {
+      "anchor_topk": 0.4318308291597106,
+      "direct_multi": 0.4318308291597106,
+      "knn3": 0.9782971619365609,
+      "logreg": 0.9499165275459098,
+      "original_topk": 0.4318308291597106
+    },
+    "0.15": {
+      "anchor_topk": 0.4204785754034502,
+      "direct_multi": 0.4204785754034502,
+      "knn3": 0.9701725097384529,
+      "logreg": 0.6856149137451307,
+      "original_topk": 0.4204785754034502
+    },
+    "0.3": {
+      "anchor_topk": 0.37723984418475237,
+      "direct_multi": 0.37723984418475237,
+      "knn3": 0.9280467445742905,
+      "logreg": 0.38380634390651086,
+      "original_topk": 0.37723984418475237
+    }
+  },
+  "archive_sha256": "25329b5814b14c5210ad1417279de48883217127ec30f5e06015954a99c9aba7",
+  "checks": [
+    "manifest file hashes",
+    "archive-directory byte equality",
+    "downloaded-local source identity",
+    "GPU admission",
+    "dataset digest",
+    "raw uniqueness and completeness",
+    "fold metric replay",
+    "group effects",
+    "bootstrap intervals",
+    "permutation p-values",
+    "Holm adjustment",
+    "hypothesis decisions",
+    "negative-control retained arithmetic",
+    "log completion"
+  ],
+  "claim_boundary": "Writer-disjoint partition confirmation on the official UCI split. It is not writer-cluster-adjusted inference, independent reproduction, SOTA evidence, or unrestricted efficacy evidence.",
+  "failures": [],
+  "fold_metric_rows": 300,
+  "hardware": {
+    "benchmark": {
+      "checksum": -49.440372467041016,
+      "elapsed_seconds": 0.1616608260000021,
+      "estimated_tflops": 0.8501685712777332
+    },
+    "cuda": "12.8",
+    "device": "cuda:0",
+    "name": "Tesla T4",
+    "torch": "2.11.0+cu128",
+    "total_memory_bytes": 15636037632
+  },
+  "kaggle_url": "https://www.kaggle.com/code/ryangomez010/epu-e7-writer-disjoint-gpu-r1-20261021",
+  "manifest_sha256": "fa6030d6648ec518c43e4f61d5a83e316c7132e62457cb1eebf734e5c6cb2ed6",
+  "negative_control": {
+    "cpu_mean_accuracy": 0.08786867000556484,
+    "cpu_replay_exact": true,
+    "cpu_status": "PASS",
+    "gpu_mean_accuracy": 0.08786867000556484,
+    "gpu_status": "PASS",
+    "maximum_absolute_accuracy_difference": 0.0,
+    "threshold": 0.2
+  },
+  "outcomes": {
+    "H-E7-NONINFERIOR-LOGREG": {
+      "bootstrap_95": [
+        -0.28480824522352066,
+        -0.241726952327954
+      ],
+      "effect": -0.2632628454832127,
+      "holm_p": 1.0,
+      "raw_permutation_p": 1.0,
+      "status": "FAIL"
+    },
+    "H-E7-ROBUSTNESS": {
+      "bootstrap_95": [
+        0.0,
+        0.0
+      ],
+      "effect": 0.0,
+      "holm_p": 1.0,
+      "raw_permutation_p": 1.0,
+      "status": "FAIL"
+    },
+    "H-E7-STABILITY": {
+      "bootstrap_95": [
+        0.6872370250369341,
+        0.6938911719968468
+      ],
+      "effect": 0.6905529825228379,
+      "holm_p": null,
+      "raw_permutation_p": null,
+      "status": "PASS"
+    },
+    "H-E7-UTILITY": {
+      "bootstrap_95": [
+        0.0,
+        0.0
+      ],
+      "effect": 0.0,
+      "holm_p": 1.0,
+      "raw_permutation_p": 1.0,
+      "status": "FAIL"
+    }
+  },
+  "raw_records": 107820,
+  "raw_sha256": "39905157c4eeb03cb6a5cd55951eb29bf046d32ca937e34102e19f58c32f108a",
+  "source": {
+    "PROTOCOL.json": "436a526420998a23233657ee9ac5d156d24a4484e4215e983e1380ca8b024a1c",
+    "study.py": "5079447fe8602e441c55c6b62b3d6b0194862b352055233083ec2a8298bbd89f"
+  },
+  "status": "PASS_E7_R1_RETAINED_EVIDENCE",
+  "version": "EPU-REALDATA-E7-WRITER-DISJOINT-GPU-R1"
+}

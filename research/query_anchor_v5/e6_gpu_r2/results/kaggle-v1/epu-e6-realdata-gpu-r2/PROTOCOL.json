@@ -1,0 +1,121 @@
+{
+  "claim_boundary": "Exploratory real-data development evidence. The dataset has no writer identifiers, so this is not writer-disjoint confirmation, independent reproduction, SOTA evidence, or unrestricted efficacy evidence.",
+  "dataset": {
+    "expected_classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "expected_features": 64,
+    "expected_rows": 1797,
+    "identity": "scikit-learn load_digits optical handwritten digits",
+    "license": "BSD-3-Clause data distributed with scikit-learn; derived from UCI Optical Recognition of Handwritten Digits",
+    "writer_ids_available": false
+  },
+  "evidence_role": "EXPLORATORY_REAL_DATA_CORRECTED_SUCCESSOR_INFORMED_BY_EPU_QA1_AND_V1_V5",
+  "experimental_unit": "exact-feature group after averaging repeated out-of-fold predictions within group",
+  "folds": 5,
+  "frozen_utc_date": "2026-10-21",
+  "hardware": {
+    "failure_state": "BLOCKED_NO_ADMITTED_GPU",
+    "paid_compute_authorized": false,
+    "required": "CUDA GPU with at least 8 GiB total memory"
+  },
+  "hypotheses": [
+    {
+      "contrast": "anchor_topk minus direct_multi averaged across declared noise levels",
+      "decision": "effect >= 0.01, lower 95% paired bootstrap bound > 0, Holm-adjusted one-sided permutation p < 0.05",
+      "id": "H-E6-UTILITY",
+      "minimum_effect": 0.01
+    },
+    {
+      "contrast": "anchor_topk minus direct_multi at noise 0.30",
+      "decision": "effect >= 0.01, lower 95% paired bootstrap bound > 0, Holm-adjusted one-sided permutation p < 0.05",
+      "id": "H-E6-ROBUSTNESS",
+      "minimum_effect": 0.01
+    },
+    {
+      "contrast": "anchor_topk minus fixed logistic regression averaged across declared noise levels",
+      "decision": "effect >= -0.01, lower 95% paired bootstrap bound > -0.01, and Holm-adjusted one-sided permutation p against the -0.01 margin < 0.05",
+      "id": "H-E6-NONINFERIOR-LOGREG",
+      "margin": -0.01
+    },
+    {
+      "contrast": "original_topk minus anchor_topk mean state displacement",
+      "decision": "effect >= 0.1 and lower 95% paired bootstrap bound > 0.1",
+      "id": "H-E6-STABILITY",
+      "minimum_effect": 0.1
+    }
+  ],
+  "inference": {
+    "bootstrap_resamples": 10000,
+    "confidence": 0.95,
+    "estimand": "unweighted mean across exact-feature groups; repeated split, row, and declared-noise observations are averaged inside each group before inference",
+    "familywise_alpha": 0.05,
+    "multiplicity": "Holm adjustment across three accuracy hypotheses",
+    "paired_sign_permutations": 100000,
+    "unit": "exact-feature group"
+  },
+  "methods": [
+    "direct_multi",
+    "original_topk",
+    "anchor_topk",
+    "knn3",
+    "logreg"
+  ],
+  "model": {
+    "alpha": 0.6,
+    "anchor_retrieval_lambda": 0.1,
+    "beta": 6.0,
+    "knn_k": 3,
+    "logreg_C": 1.0,
+    "logreg_max_iter": 2000,
+    "original_retrieval_lambda": 1.0,
+    "prototype_fit": "deterministic farthest-first on training rows only",
+    "prototypes_per_class": 2,
+    "retrieval_top_k": 2,
+    "steps": 8
+  },
+  "negative_control": {
+    "design": "20 deterministic training-label permutations in repeat 0 fold 0 at zero noise, evaluated with anchor_topk",
+    "pass_threshold_accuracy": 0.2
+  },
+  "noise_standard_deviations": [
+    0.0,
+    0.15,
+    0.3
+  ],
+  "repeats": 20,
+  "seeds": [
+    101,
+    211,
+    307,
+    401,
+    503,
+    601,
+    701,
+    809,
+    907,
+    1009,
+    1103,
+    1201,
+    1301,
+    1409,
+    1511,
+    1601,
+    1709,
+    1801,
+    1907,
+    2003
+  ],
+  "supersedes": "EPU-REALDATA-E6-GPU-R1",
+  "supersession_reason": "R1 omitted the original-query anchor term and did not apply top-k retrieval; R2 corrects both before any admitted GPU/data run.",
+  "version": "EPU-REALDATA-E6-GPU-R2"
+}

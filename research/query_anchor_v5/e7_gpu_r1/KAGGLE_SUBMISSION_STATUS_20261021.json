@@ -1,6 +1,31 @@
 {
-  "kernel_ref": "ryangomez010/epu-e7-writer-disjoint-gpu-r1-20261021",
-  "prepared_utc_date": "2026-10-21",
-  "status": "PREPARED_NOT_SUBMITTED_GPU_CAPACITY_BLOCKED",
-  "submission_policy": "submit only when a free Kaggle batch GPU slot is available; do not cancel unrelated jobs; no paid compute; Internet off"
+  "protocol_version": "EPU-REALDATA-E7-WRITER-DISJOINT-GPU-R1",
+  "observed_utc": "2026-10-21T13:12:19Z",
+  "kaggle_notebook": "https://www.kaggle.com/code/ryangomez010/epu-e7-writer-disjoint-gpu-r1-20261021",
+  "kaggle_version": 1,
+  "notebook_payload_sha256": "b0e89b3b67f6aaae202e7b9097489be120716e28b1fd448789365895e275a185",
+  "protocol_sha256": "436a526420998a23233657ee9ac5d156d24a4484e4215e983e1380ca8b024a1c",
+  "study_sha256": "5079447fe8602e441c55c6b62b3d6b0194862b352055233083ec2a8298bbd89f",
+  "state": "COMPLETE_RETAINED_EVIDENCE_VERIFIED",
+  "hardware": "Tesla T4, 15636037632 bytes, CUDA 12.8",
+  "records": 107820,
+  "fold_metric_rows": 300,
+  "outcomes": {
+    "H-E7-UTILITY": "FAIL",
+    "H-E7-ROBUSTNESS": "FAIL",
+    "H-E7-NONINFERIOR-LOGREG": "FAIL",
+    "H-E7-STABILITY": "PASS"
+  },
+  "negative_control": {
+    "gpu_mean_accuracy": 0.08786867000556484,
+    "gpu_status": "PASS",
+    "cpu_replay_mean_accuracy": 0.08786867000556484,
+    "cpu_replay_status": "PASS",
+    "cpu_replay_exact": true
+  },
+  "manifest_sha256": "fa6030d6648ec518c43e4f61d5a83e316c7132e62457cb1eebf734e5c6cb2ed6",
+  "raw_sha256": "39905157c4eeb03cb6a5cd55951eb29bf046d32ca937e34102e19f58c32f108a",
+  "archive_sha256": "25329b5814b14c5210ad1417279de48883217127ec30f5e06015954a99c9aba7",
+  "verification_receipt_sha256": "b4b4692d7c2673dc1acbe09b84d7a760c601f32bbf0500da4bcbc7c0a55d36af",
+  "claim": "Verified writer-disjoint partition confirmation on the official UCI split. It is not writer-cluster-adjusted inference or independent reproduction."
 }
