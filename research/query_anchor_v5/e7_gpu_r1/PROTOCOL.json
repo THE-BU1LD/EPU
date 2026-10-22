@@ -1,0 +1,85 @@
+{
+  "version": "EPU-REALDATA-E7-WRITER-DISJOINT-GPU-R1",
+  "frozen_utc_date": "2026-10-21",
+  "predecessor": "EPU-REALDATA-E6-GPU-R2",
+  "evidence_role": "WRITER_DISJOINT_REAL_DATA_CONFIRMATION",
+  "dataset": {
+    "identity": "UCI Optical Recognition of Handwritten Digits official fixed split",
+    "doi": "10.24432/C50P49",
+    "source_url": "https://archive.ics.uci.edu/static/public/80/optical+recognition+of+handwritten+digits.zip",
+    "archive_sha256": "0d7b054fea010270e9b3f06411c654c5e59547732ad626381980baffe0a23fb0",
+    "training_file": "optdigits.tra",
+    "test_file": "optdigits.tes",
+    "expected_train_rows": 3823,
+    "expected_test_rows": 1797,
+    "expected_features": 64,
+    "expected_classes": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "partition_statement": "UCI states that 30 people contributed to training and a different 13 to test; the fixed test set is the writer-independent quality measure.",
+    "writer_ids_available": false,
+    "license": "CC BY 4.0"
+  },
+  "experimental_unit": "exact-feature group in the fixed writer-independent test partition after averaging repeat and declared-noise observations within group",
+  "repeats": 20,
+  "seeds": [101, 211, 307, 401, 503, 601, 701, 809, 907, 1009, 1103, 1201, 1301, 1409, 1511, 1601, 1709, 1801, 1907, 2003],
+  "noise_standard_deviations": [0.0, 0.15, 0.3],
+  "methods": ["direct_multi", "original_topk", "anchor_topk", "knn3", "logreg"],
+  "model": {
+    "prototypes_per_class": 2,
+    "retrieval_top_k": 2,
+    "prototype_fit": "deterministic farthest-first on the official training partition only",
+    "steps": 8,
+    "alpha": 0.6,
+    "beta": 6.0,
+    "original_retrieval_lambda": 1.0,
+    "anchor_retrieval_lambda": 0.1,
+    "knn_k": 3,
+    "logreg_C": 1.0,
+    "logreg_max_iter": 2000
+  },
+  "inference": {
+    "confidence": 0.95,
+    "bootstrap_resamples": 10000,
+    "paired_sign_permutations": 100000,
+    "familywise_alpha": 0.05,
+    "multiplicity": "Holm adjustment across three accuracy hypotheses",
+    "unit": "exact-feature group in fixed test partition",
+    "estimand": "unweighted mean across exact-feature groups; repeat and declared-noise observations are averaged inside each group",
+    "limitation": "writer identities within the 13-writer test partition are unavailable, so intervals do not account for within-writer clustering"
+  },
+  "hypotheses": [
+    {
+      "id": "H-E7-UTILITY",
+      "contrast": "anchor_topk minus direct_multi averaged across declared noise levels",
+      "minimum_effect": 0.01,
+      "decision": "effect >= 0.01, lower 95% paired bootstrap bound > 0, Holm-adjusted one-sided permutation p < 0.05"
+    },
+    {
+      "id": "H-E7-ROBUSTNESS",
+      "contrast": "anchor_topk minus direct_multi at noise 0.30",
+      "minimum_effect": 0.01,
+      "decision": "effect >= 0.01, lower 95% paired bootstrap bound > 0, Holm-adjusted one-sided permutation p < 0.05"
+    },
+    {
+      "id": "H-E7-NONINFERIOR-LOGREG",
+      "contrast": "anchor_topk minus fixed logistic regression averaged across declared noise levels",
+      "margin": -0.01,
+      "decision": "effect >= -0.01, lower 95% paired bootstrap bound > -0.01, and Holm-adjusted one-sided permutation p against the -0.01 margin < 0.05"
+    },
+    {
+      "id": "H-E7-STABILITY",
+      "contrast": "original_topk minus anchor_topk mean state displacement",
+      "minimum_effect": 0.1,
+      "decision": "effect >= 0.1 and lower 95% paired bootstrap bound > 0.1"
+    }
+  ],
+  "negative_control": {
+    "design": "20 deterministic training-label permutations evaluated on the fixed writer-independent test partition at zero noise with anchor_topk",
+    "pass_threshold_accuracy": 0.2
+  },
+  "hardware": {
+    "required": "CUDA GPU with at least 8 GiB total memory",
+    "failure_state": "BLOCKED_NO_ADMITTED_GPU",
+    "paid_compute_authorized": false
+  },
+  "claim_boundary": "Writer-disjoint partition confirmation on the official UCI split. It is not writer-cluster-adjusted inference, independent reproduction, SOTA evidence, or unrestricted efficacy evidence."
+}

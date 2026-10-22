@@ -1,0 +1,9 @@
+{
+  "input_manifest_sha256": "792ec09e196938220251b0ac477610281d4eee866c7dba2c7a0439a51d767270",
+  "outputs": {
+    "RESULTS.md": "4ad2dd6254a9b09f0c4c26040a449bde27848bfd77c23d0f3bc7fa67429db316",
+    "synthetic_accuracy.svg": "9e4041883b942e02232b22d0502e629a3bdab3c82645c5c90c86f6551358fd57",
+    "synthetic_metrics.csv": "e1d1b4448c0da811fbd6f85a3d09d675799a61a15f207221cbef6d211498f64d"
+  },
+  "status": "PASS_V5_REPORT"
+}

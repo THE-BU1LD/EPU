@@ -1,0 +1,16 @@
+{
+  "id": "ryangomez010/epu-e6-real-data-gpu-r2-corrected-20261021",
+  "title": "EPU E6 real-data GPU R2 corrected 20261021",
+  "code_file": "epu_e6_realdata_gpu_r2.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": "true",
+  "enable_gpu": "true",
+  "enable_tpu": "false",
+  "enable_internet": "false",
+  "machine_shape": "",
+  "dataset_sources": [],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}

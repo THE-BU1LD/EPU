@@ -1,0 +1,31 @@
+{
+  "protocol_version": "EPU-REALDATA-E6-GPU-R2",
+  "observed_utc": "2026-10-21T13:12:19Z",
+  "kaggle_notebook": "https://www.kaggle.com/code/ryangomez010/epu-e6-real-data-gpu-r2-corrected-20261021",
+  "kaggle_version": 1,
+  "notebook_payload_sha256": "4be88ea4a13ac1581edb3e03bfdd8ecc273b40e3f9cf23ba85b53198abf05526",
+  "protocol_sha256": "c9639db017ba87d2524096755590bf630e7826c2b7a327b5d1d9f5ceed4eef6a",
+  "study_sha256": "0557b46e34f61572e0e08bdce5da1b4a997b4aa13cf1792841f1e596fcc4a54c",
+  "state": "COMPLETE_RETAINED_EVIDENCE_VERIFIED_WITH_CROSS_RUNTIME_CONTROL_MISMATCH",
+  "hardware": "Tesla T4, 15636037632 bytes, CUDA 12.8",
+  "records": 107820,
+  "fold_metric_rows": 1500,
+  "outcomes": {
+    "H-E6-UTILITY": "FAIL",
+    "H-E6-ROBUSTNESS": "FAIL",
+    "H-E6-NONINFERIOR-LOGREG": "FAIL",
+    "H-E6-STABILITY": "PASS"
+  },
+  "negative_control": {
+    "gpu_mean_accuracy": 0.11194444444444443,
+    "gpu_status": "PASS",
+    "cpu_replay_mean_accuracy": 0.10055555555555558,
+    "cpu_replay_status": "PASS",
+    "cpu_replay_exact": false
+  },
+  "manifest_sha256": "a44abac9586d845b597afe1e696a1f86b5ed65c498a7bbdff66d3f8a1dd51d06",
+  "raw_sha256": "8cddc9d770750085e9bf4257dd4b23146277d02e2d620cf94ec912e1d8cd6dba",
+  "archive_sha256": "99599f9ed533706a38794c46c7b90dd1bd362784125e881599e1307569ce9942",
+  "verification_receipt_sha256": "ced3651a9d053c8285b97f2f643bf8b9f6e8cfe7908a8e9e67f4196424d92703",
+  "claim": "Verified exploratory real-data evidence. Exact independent GPU reproduction remains required; the shuffled-label control decision reproduces on CPU but its individual accuracies do not."
+}

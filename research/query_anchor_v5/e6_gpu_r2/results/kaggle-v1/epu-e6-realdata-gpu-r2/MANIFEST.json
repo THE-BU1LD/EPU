@@ -1,0 +1,23 @@
+{
+  "claim_boundary": "Exploratory real-data development evidence. The dataset has no writer identifiers, so this is not writer-disjoint confirmation, independent reproduction, SOTA evidence, or unrestricted efficacy evidence.",
+  "files": {
+    "DATASET.json": "faa21d1fd2baf252b4a962715d84e7471d6f13196d53a7f02f967d51f8f55a7c",
+    "ENVIRONMENT.json": "5088acaac60e6ce55313cfbf87afbeaccdc1de2373a271cd035e582539df6cf9",
+    "FOLD_METRICS.csv": "e06d53de4f598418737d52ab50d8dbb27adbddcc2f68d11b2c9e9798d45bfd54",
+    "HYPOTHESES.json": "29a643a074ff13e1f57c2c847fe99e3da7790d338c103fe377a08434196d91b3",
+    "PROTOCOL.json": "e73cd73d2cd790a323b69f47365e7500e30d3ca005f60d56ad770e9a93a212fd",
+    "RAW.jsonl.gz": "8cddc9d770750085e9bf4257dd4b23146277d02e2d620cf94ec912e1d8cd6dba",
+    "RESULTS.md": "165afa1bb39140a4b69a488b7aa16e3a973ee82ef414a40850732fd25a0747ce",
+    "SELF_TEST.json": "b704300d8a682596267e107a1444af2c09bc81fe82d37b9e3a858ea6b510783d"
+  },
+  "gpu_prediction_batches": 1220,
+  "inference_group_count": 1797,
+  "inference_unit": "exact-feature group",
+  "records": 107820,
+  "source": {
+    "PROTOCOL.json": "c9639db017ba87d2524096755590bf630e7826c2b7a327b5d1d9f5ceed4eef6a",
+    "study.py": "0557b46e34f61572e0e08bdce5da1b4a997b4aa13cf1792841f1e596fcc4a54c"
+  },
+  "status": "COMPLETE",
+  "version": "EPU-REALDATA-E6-GPU-R2"
+}

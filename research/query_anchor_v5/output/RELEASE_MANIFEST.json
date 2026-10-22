@@ -1,0 +1,20 @@
+{
+  "artifacts": {
+    "output/arxiv/epu-query-anchoring-v5-arxiv-source.tar.gz": {
+      "bytes": 16568,
+      "sha256": "3b763b11ccf1538864a0ec448c88bf13df5056bc4ef89c4cdd849e5497033878"
+    },
+    "output/evidence/epu-v5-full-evidence.tar.gz": {
+      "bytes": 12737102,
+      "sha256": "39ad989f8c9b4ae343a4cbfd5aa14e6a0e8c6e74b0bbe8b5d3e3e0516da97d6a"
+    },
+    "output/pdf/EPU_Query_Anchoring_V5_2026-10-20.pdf": {
+      "bytes": 84107,
+      "sha256": "307bbcb14d1afd41d54d1b6c142453697574f21da6fcfd0706c203ad242844a6"
+    }
+  },
+  "paper_verification_sha256": "99efc01a300f0bafdf5f5dca6887c80784a5504f07abd2a161b759d8f3384797",
+  "real_data_status": "E6_EXPLORATORY_AND_E7_WRITER_INDEPENDENT_VERIFIED",
+  "scientific_disposition": "NEGATIVE_CLASSIFICATION_UTILITY_WITH_POSITIVE_DISPLACEMENT_EFFECT",
+  "status": "PASS_RELEASE_PACKAGING"
+}

@@ -1,0 +1,26 @@
+{
+  "claim_boundary": "Negative efficacy result from source-bound synthetic, exploratory real-data, and writer-independent partition studies; no SOTA, unrestricted generalization, or independent reproduction claim.",
+  "nonempty_pages": 12,
+  "pages": 12,
+  "pdf_sha256": "307bbcb14d1afd41d54d1b6c142453697574f21da6fcfd0706c203ad242844a6",
+  "required_phrases_verified": [
+    "Query Anchoring Stabilizes Associative Retrieval",
+    "RECURRENT-UTILITY",
+    "27,648",
+    "UTILITY",
+    "107,820",
+    "writer-independent",
+    "cross-runtime negative-control mismatch",
+    "V4 remains historical evidence"
+  ],
+  "sources": {
+    "BUILD_RECEIPT.json": "dfa5a7e13178fd1e130ff3295a4c4270f02d54f9e56e8a58f01f8c85d34b6ac2",
+    "CLAIM_EVIDENCE_MATRIX.csv": "16328b7832d72899acf535a76ecce806f93948d24682a8110071f149a53d16cd",
+    "FLAW_REGISTER.md": "cfcc887870a17a90a3c55bae5dd31147f0732b898e7ef5598d143606487a5f65",
+    "arxiv.sty": "94100720b0deccc57fb5d48e0ebf7af14064a496132a721f0ded95c0890eb889",
+    "main.tex": "6e3492bd7287ce3662a4fd0a6d68199456a50b4e75d113e524bf472d82f5dd3b",
+    "references.bib": "1e5fc7daf317687b918c4088fe1bf9325d4d0ed73d62c89f6b6ad595ce1b3798"
+  },
+  "status": "PASS_FINAL_PAPER_VERIFICATION",
+  "visual_review": "PASS_12_RENDERED_PAGES_2026-10-22"
+}

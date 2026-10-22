@@ -1,0 +1,17 @@
+{
+  "execution_state": "PREPARED_NOT_EXECUTED",
+  "files": [
+    "PROTOCOL.json",
+    "README.md",
+    "SOURCE_RECEIPT.json",
+    "study.py",
+    "optdigits.names",
+    "optdigits.tra",
+    "optdigits.tes"
+  ],
+  "notebook": "epu_e7_writer_disjoint_gpu_r1.ipynb",
+  "payload_sha256": "b0e89b3b67f6aaae202e7b9097489be120716e28b1fd448789365895e275a185",
+  "protocol_sha256": "436a526420998a23233657ee9ac5d156d24a4484e4215e983e1380ca8b024a1c",
+  "source_receipt_sha256": "b6a3379582db58b25d0fc6c31ea7925cef530e7c8248628a1be5025410bc4f2a",
+  "study_sha256": "5079447fe8602e441c55c6b62b3d6b0194862b352055233083ec2a8298bbd89f"
+}

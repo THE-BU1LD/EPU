@@ -1,0 +1,13 @@
+# Retained scientific artifacts are byte-bound by manifests and must not be
+# line-ending normalized or rewritten by Git.
+e6_gpu_r2/results/**/*.csv -text -diff
+e7_gpu_r1/results/**/*.csv -text -diff
+e6_gpu_r2/results/**/*.gz -text -diff
+e7_gpu_r1/results/**/*.gz -text -diff
+e6_gpu_r2/results/**/*.log -text -diff
+e7_gpu_r1/results/**/*.log -text -diff
+e7_gpu_r1/results/**/*.names -text -diff
+e7_gpu_r1/results/**/*.tes -text -diff
+e7_gpu_r1/results/**/*.tra -text -diff
+output/** -text -diff
+paper/generated/*.pdf -text -diff

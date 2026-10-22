@@ -1,0 +1,15 @@
+{
+  "admission_check": {
+    "data_files_created_before_refusal": false,
+    "message": "BLOCKED_NO_ADMITTED_GPU: CUDA unavailable",
+    "status": "PASS_FAIL_CLOSED"
+  },
+  "build_notebook_sha256": "e8656770d5a086f7b135efb655e19e7cc28670780123737ce69b73d3b1fd520c",
+  "notebook_receipt_sha256": "d42cd2feb4a57e3c81af364b485be389f1f1850bf0fea473983a3c8a05869fa9",
+  "notebook_sha256": "95496df1448ea6311e7ce2fd631f696541de6bbd18244cc38f5b5211cedbc7a0",
+  "package_verification": "PASS_E7_R1_PACKAGE",
+  "self_test": "PASS_SELF_TEST",
+  "verified_utc_date": "2026-10-21",
+  "verifier_sha256": "54fee133c2359268386b6c7b00673b0067c45d73f05b0e606be735962377525b",
+  "version": "EPU-REALDATA-E7-WRITER-DISJOINT-GPU-R1"
+}
