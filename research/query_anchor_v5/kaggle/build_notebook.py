@@ -18,7 +18,6 @@ ROOT = Path(__file__).resolve().parents[2]
 OUTPUT = Path(__file__).with_name("epu_query_anchor_v5_kaggle.ipynb")
 FILES = [
     "epu_research_system/__init__.py",
-    "epu_research_system/model.py",
     "epu_research_system/synthetic.py",
     "epu_research_system/v5/__init__.py",
     "epu_research_system/v5/model.py",
